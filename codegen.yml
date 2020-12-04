@@ -1,11 +1,14 @@
 schema: ./testSchema.graphql
 documents: ./docs.graphql
+hooks:
+  afterOneFileWrite:
+    - prettier --write
 generates:
-  ./output.js:
+  ./output.ts:
     plugins:
-      # - typescript
-      # - typescript-operations
-      # - typescript-document-nodes
+      - typescript
+      - typescript-operations
+      - typescript-document-nodes
       - ./dist/index.js
     # config:
     #   noExport: true

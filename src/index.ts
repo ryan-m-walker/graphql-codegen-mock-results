@@ -43,7 +43,7 @@ export const plugin: PluginFunction<
     ...config,
   }
 
-  const isTS = !!info?.outputFile?.match(/.ts$/)
+  const isTS = !!info?.outputFile?.match(/.(ts|tsx)$/)
 
   const buildName = nameBuilderFactory(mergedConfig)
   const results = []
@@ -80,10 +80,6 @@ export const plugin: PluginFunction<
     content: results.join("\n\n"),
   }
 }
-
-// export const addToSchema = `
-//   import { ExecutionResult } from 'graphql'
-// `
 
 type FragmentMap = { [name: string]: FragmentDefinitionNode }
 type VisitedFragmentNames = { [name: string]: boolean }
@@ -200,28 +196,16 @@ function resolveField(
   const type = getNamedType(fieldDef.type)
 
   if (unwrapped instanceof GraphQLList) {
-    return `${fieldReturnName}: [${handleNamedType(
-      context,
-      type,
-      fieldNode,
-      fieldReturnName
-    )}]`
+    return `${fieldReturnName}: [${handleNamedType(context, type, fieldNode)}]`
   }
 
-  return `${fieldReturnName}: ${handleNamedType(
-    context,
-    type,
-    fieldNode,
-    fieldName
-  )}`
+  return `${fieldReturnName}: ${handleNamedType(context, type, fieldNode)}`
 }
 
 function handleNamedType(
   context: ExecutionContext,
   type: GraphQLNamedType,
-  fieldNode: FieldNode,
-  fieldName: string
-  // fieldReturnName: string
+  fieldNode: FieldNode
 ) {
   // taken from https://github.com/ardatan/graphql-tools/blob/master/packages/mock/src/mocking.ts#L57-L64
   function uuidv4() {
@@ -238,10 +222,6 @@ function handleNamedType(
     Float: () => Number((context.random() * 200 - 100).toFixed(2)),
     Boolean: () => context.random() > 0.5,
     ID: () => `'${uuidv4()}'`,
-  }
-
-  if (fieldName === "__typename") {
-    return `__typename: ${type.name}`
   }
 
   if (type instanceof GraphQLScalarType) {
@@ -387,7 +367,5 @@ function buildType(
   const root = getOperationRootType(schema, operation)
   const convert = convertFactory({ namingConvention: config.namePrefix })
   const name = convert(operation)
-  console.log(name)
   return `: ExecutionResult<${name + root.name}>`
-  // const name = operation
 }

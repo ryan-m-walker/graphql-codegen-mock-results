@@ -1,5 +1,21 @@
-query GetMyData {
-  persons {
+query myQuery {
+  pokedex {
     id
+    created
+    name
+  }
+}
+
+query getPokemon($id: Int!) {
+  pokemon(number: $id) {
+    id
+    abilities {
+      edges {
+        node {
+          name
+          description
+        }
+      }
+    }
   }
 }

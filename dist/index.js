@@ -223,11 +223,10 @@ function nameBuilderFactory(config) {
         if (config.namePrefix) {
             name += config.namePrefix;
         }
+        const formatter = config.namePrefix ? capitalize : toPascalCase;
         const baseName = (_b = (_a = operation.name) === null || _a === void 0 ? void 0 : _a.value) !== null && _b !== void 0 ? _b : `Unnamed_${++unnamedOperationCount}_`;
-        name += config.nameSuffix ? toPascalCase(baseName) : capitalize(baseName);
-        if (config.nameSuffix) {
-            name += config.nameSuffix;
-        }
+        name += formatter(baseName);
+        name += config.nameSuffix;
         return name;
     };
 }

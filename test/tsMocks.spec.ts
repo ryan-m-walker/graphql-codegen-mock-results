@@ -107,6 +107,28 @@ it("mocks built in scalar values", async () => {
   )
 })
 
+it("handles __typename", async () => {
+  const documents = buildDocuments([
+    /* GraphQL */ `
+      query testQuery {
+        testType {
+          __typename
+          testType {
+            __typename
+          }
+          list {
+            __typename
+          }
+        }
+      }
+    `,
+  ])
+  const output = await plugin(schema, documents, {})
+  expect(output.content.trim()).toEqual(
+    "export const testQueryMock = { data: { testType: { __typename: 'TestType', testType: { __typename: 'TestType' }, list: [{ __typename: 'TestType' }] } } };"
+  )
+})
+
 it("does not render exports if noExport is true", async () => {
   const documents = buildDocuments([
     /* GraphQL */ `
@@ -361,4 +383,103 @@ it("handles interfaces", async () => {
   expect(output.content.trim()).toEqual(
     "export const testQueryMock = { data: { testInterface: { __typename: 'TestInterfaceType1', id: 'e509e6ea-9fee-442a-9962-587ce7190430', name: 'Hello World' } } };"
   )
+})
+
+it("handles fragments", async () => {
+  const documents = buildDocuments([
+    /* GraphQL */ `
+      query TestQuery {
+        testType {
+          ...testFragment
+        }
+      }
+
+      fragment testFragment on TestType {
+        string
+        int
+        boolean
+      }
+    `,
+  ])
+  const output = await plugin(schema, documents, {})
+  expect(output.content.trim()).toEqual(
+    "export const testQueryMock = { data: { testType: { string: 'Hello World', int: 84, boolean: false } } };"
+  )
+})
+
+it("handles nested fragments", async () => {
+  const documents = buildDocuments([
+    /* GraphQL */ `
+      query TestQuery {
+        testType {
+          ...testFragment
+        }
+      }
+
+      fragment testFragment on TestType {
+        string
+        ...nestedTestFragment
+      }
+
+      fragment nestedTestFragment on TestType {
+        int
+        boolean
+      }
+    `,
+  ])
+  const output = await plugin(schema, documents, {})
+  expect(output.content.trim()).toEqual(
+    "export const testQueryMock = { data: { testType: { string: 'Hello World', int: 84, boolean: false } } };"
+  )
+})
+
+it("does not prepend ExecutionResult import if output is not a .ts or .tsx file", async () => {
+  const documents = buildDocuments([
+    /* GraphQL */ `
+      query testQuery {
+        testType {
+          string
+        }
+      }
+    `,
+  ])
+  const output = await plugin(schema, documents, {}, { outputFile: "test.js" })
+  expect(output.content.trim()).toEqual(
+    "export const testQueryMock = { data: { testType: { string: 'Hello World' } } };"
+  )
+  expect(output.prepend[0]).toBeUndefined()
+})
+
+it("adds TypeScript specific code if output file is a .ts file", async () => {
+  const documents = buildDocuments([
+    /* GraphQL */ `
+      query testQuery {
+        testType {
+          string
+        }
+      }
+    `,
+  ])
+  const output = await plugin(schema, documents, {}, { outputFile: "test.ts" })
+  expect(output.content.trim()).toEqual(
+    "export const testQueryMock: ExecutionResult<TestQueryQuery> = { data: { testType: { string: 'Hello World' } } };"
+  )
+  expect(output.prepend[0]).toEqual("import { ExecutionResult } from 'graphql'")
+})
+
+it("adds TypeScript specific code if output file is a .tsx file", async () => {
+  const documents = buildDocuments([
+    /* GraphQL */ `
+      query testQuery {
+        testType {
+          string
+        }
+      }
+    `,
+  ])
+  const output = await plugin(schema, documents, {}, { outputFile: "test.tsx" })
+  expect(output.content.trim()).toEqual(
+    "export const testQueryMock: ExecutionResult<TestQueryQuery> = { data: { testType: { string: 'Hello World' } } };"
+  )
+  expect(output.prepend[0]).toEqual("import { ExecutionResult } from 'graphql'")
 })
