@@ -18,6 +18,7 @@ import {
   GraphQLList,
   GraphQLNamedType,
   getNullableType,
+  GraphQLInputObjectType,
 } from "graphql"
 import seed from "seed-random"
 
@@ -260,7 +261,11 @@ function handleNamedType(
     return `'${value}'`
   }
 
-  // TODO: Input Object Type??
+  // if (type instanceof GraphQLInputObjectType) {
+  //   console.log("HERE")
+  //   return ""
+  // }
+
   return ""
 }
 
