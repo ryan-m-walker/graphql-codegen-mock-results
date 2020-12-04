@@ -1,0 +1,1 @@
+export const getMyDataMock = { data: { persons: [{ id: 'e509e6ea-9fee-442a-9962-587ce7190430' }] } };

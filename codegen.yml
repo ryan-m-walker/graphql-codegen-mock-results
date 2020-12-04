@@ -1,0 +1,12 @@
+schema: ./testSchema.graphql
+documents: ./docs.graphql
+generates:
+  ./output.js:
+    plugins:
+      # - typescript
+      # - typescript-operations
+      # - typescript-document-nodes
+      - ./dist/index.js
+    # config:
+    #   noExport: true
+    # namingConvention: keep
