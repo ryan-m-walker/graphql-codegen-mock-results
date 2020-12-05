@@ -1,64 +1,48 @@
-import { Types } from "@graphql-codegen/plugin-helpers"
 import {
-  GraphQLSchema,
-  SelectionSetNode,
-  Kind,
   DocumentNode,
-  FragmentDefinitionNode,
   FieldNode,
-  OperationDefinitionNode,
-  getOperationRootType,
-  GraphQLObjectType,
-  GraphQLScalarType,
   getNamedType,
-  GraphQLUnionType,
-  GraphQLEnumType,
-  GraphQLInterfaceType,
+  getNullableType,
+  getOperationRootType,
+  GraphQLNamedType,
+  GraphQLObjectType,
+  GraphQLSchema,
+  isEnumType,
+  isInterfaceType,
+  isListType,
+  isObjectType,
+  isScalarType,
+  isUnionType,
+  Kind,
+  OperationDefinitionNode,
+  SelectionSetNode,
 } from "graphql"
 
-const scalarToValue = {
-  String: "'Hello World'",
-  Int: 123456,
-  Float: 123.456,
-  Boolean: true,
-  ID: "'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'",
-}
+import { MocksPluginConfig } from "./config"
+import { randomFactory, RandomFn } from "./random"
+import {
+  ExecutionContext,
+  FieldsMap,
+  FragmentMap,
+  VisitedFragmentNames,
+} from "./types"
 
-export const plugin = (
+export function execute(
   schema: GraphQLSchema,
-  documents: Types.DocumentFile[],
-  config?: object
-) => {
-  let unnamedOperationCount = 0
-  const results = []
-
-  for (const document of documents) {
-    for (const definition of document.document.definitions) {
-      if (definition.kind === Kind.OPERATION_DEFINITION) {
-        const operationName =
-          definition?.name?.value ?? `Unnamed_${++unnamedOperationCount}_`
-        const data = execute(
-          schema,
-          document.document,
-          definition.name?.value,
-          config
-        )
-        results.push(`const ${operationName}Mock = { data: ${data} };`)
-      }
-    }
-  }
-
-  return results.join("\n\n")
-}
-
-type FragmentMap = { [name: string]: FragmentDefinitionNode }
-type VisitedFragmentNames = { [name: string]: boolean }
-type FieldsMap = { [name: string]: FieldNode[] }
-type ExecutionContext = {
-  schema: GraphQLSchema
-  fragments: FragmentMap
-  operation: OperationDefinitionNode
-  config: any // TODO: type this
+  document: DocumentNode,
+  operationName: string,
+  config: MocksPluginConfig,
+  random: RandomFn
+): string {
+  const context = buildExecutionContext(
+    schema,
+    document,
+    operationName,
+    config,
+    random
+  )
+  const result = executeOperation(context, context.operation)
+  return result
 }
 
 // This is a very trimmed down version of this function, only taking what we need:
@@ -67,7 +51,8 @@ function buildExecutionContext(
   schema: GraphQLSchema,
   document: DocumentNode,
   operationName: string,
-  config: any // TODO: type
+  config: MocksPluginConfig,
+  random: RandomFn
 ): ExecutionContext {
   let operation: OperationDefinitionNode
   const fragments: FragmentMap = Object.create(null)
@@ -90,18 +75,8 @@ function buildExecutionContext(
     fragments,
     operation,
     config,
+    random: randomFactory(random),
   }
-}
-
-function execute(
-  schema: GraphQLSchema,
-  document: DocumentNode,
-  operationName: string,
-  config: any // TODO: type this
-) {
-  const context = buildExecutionContext(schema, document, operationName, config)
-  const result = executeOperation(context, context.operation)
-  return result
 }
 
 function executeOperation(
@@ -128,9 +103,12 @@ function executeSelectionSet(
 
   const result = []
 
+  if (context.config.addTypename && !fields["__typename"]) {
+    result.push(`__typename: '${parentType.name}'`)
+  }
+
   for (const fieldName of Object.keys(fields)) {
     const field = resolveField(context, parentType, fields[fieldName])
-
     // Filter unresolved fields (like on union selection set)
     if (field) {
       result.push(field)
@@ -158,55 +136,83 @@ function resolveField(
     return ""
   }
 
+  // unwrap NonNull types
+  const unwrapped = getNullableType(fieldDef.type)
+  // unwrap list types
   const type = getNamedType(fieldDef.type)
 
-  if (fieldName === "__typename") {
-    return `__typename: ${type.name}`
+  if (isListType(unwrapped)) {
+    const values: string[] = new Array(Math.floor(context.random() * 3) + 1)
+      .fill(0)
+      .map(() => handleNamedType(context, type, fieldNode))
+    return `${fieldReturnName}: [${values.join(", ")}]`
   }
 
-  if (type instanceof GraphQLScalarType) {
-    const customScalarValue = context.config?.scalarValues?.[type.name]
+  return `${fieldReturnName}: ${handleNamedType(context, type, fieldNode)}`
+}
+
+function handleNamedType(
+  context: ExecutionContext,
+  type: GraphQLNamedType,
+  fieldNode: FieldNode
+) {
+  // taken from https://github.com/ardatan/graphql-tools/blob/master/packages/mock/src/mocking.ts#L57-L64
+  function uuidv4() {
+    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
+      const r = (context.random() * 16) | 0
+      const v = c == "x" ? r : (r & 0x3) | 0x8
+      return v.toString(16)
+    })
+  }
+
+  const scalarToValue = {
+    String: () => "'Hello World'",
+    Int: () => context.random.int(-100, 100),
+    Float: () => context.random.float(-100, 100, 2),
+    Boolean: () => context.random.bool(),
+    ID: () => `'${uuidv4()}'`,
+  }
+
+  if (isScalarType(type)) {
+    const customScalarValue = context.config?.customScalarValues?.[type.name]
     if (customScalarValue) {
       if (typeof customScalarValue === "string") {
-        return `${fieldReturnName}: '${customScalarValue}'`
+        return `'${customScalarValue}'`
       }
-      return `${fieldReturnName}: ${customScalarValue}`
+      return `${customScalarValue}`
     } else if (scalarToValue[type.name]) {
-      return `${fieldReturnName}: ${scalarToValue[type.name]}`
+      return `${scalarToValue[type.name]()}`
     }
-    return `${fieldReturnName}: 'custom'`
+    return `'${type.name}'`
   }
 
-  if (type instanceof GraphQLObjectType) {
-    return `${
-      fieldNode.alias?.value ?? fieldNode.name.value
-    }: ${executeSelectionSet(context, type, fieldNode.selectionSet)}`
+  if (isObjectType(type)) {
+    return executeSelectionSet(context, type, fieldNode.selectionSet)
   }
 
-  if (type instanceof GraphQLInterfaceType) {
-    const types = getImplementingObjects(context.schema, type)
-    return `${fieldReturnName}: ${executeSelectionSet(
-      context,
-      types[0],
-      fieldNode.selectionSet
-    )}`
+  if (isInterfaceType(type)) {
+    const types = context.schema.getImplementations(type).objects
+    return `${executeSelectionSet(context, types[0], fieldNode.selectionSet)}`
   }
 
-  if (type instanceof GraphQLUnionType) {
+  if (isUnionType(type)) {
     const selectedType = type.getTypes()[0]
-    return `${fieldReturnName}: ${executeSelectionSet(
+    return `${executeSelectionSet(
       context,
       selectedType,
       fieldNode.selectionSet
     )}`
   }
 
-  if (type instanceof GraphQLEnumType) {
+  if (isEnumType(type)) {
     const value = type.getValues()[0]?.name
-    return `${fieldReturnName}: '${value}'`
+    return `'${value}'`
   }
 
-  // TODO: Input Object Type??
+  // if (type instanceof GraphQLInputObjectType) {
+  //   console.log("HERE")
+  //   return ""
+  // }
 
   return ""
 }
@@ -259,19 +265,4 @@ function collectFields(
     }
   }
   return fields
-}
-
-function getImplementingObjects(
-  schema: GraphQLSchema,
-  gqlInterface: GraphQLInterfaceType
-) {
-  return Object.values(schema.getTypeMap()).reduce((returnTypes, type) => {
-    if (type instanceof GraphQLObjectType) {
-      const interfaces = type.getInterfaces()
-      if (interfaces.includes(gqlInterface)) {
-        returnTypes.push(type)
-      }
-    }
-    return returnTypes
-  }, [])
 }

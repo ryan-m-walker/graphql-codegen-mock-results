@@ -9,7 +9,7 @@
     "importHelpers": true,
     "experimentalDecorators": true,
     "module": "commonjs",
-    "target": "es2018",
+    "target": "es5",
     "lib": ["es6", "esnext", "es2015", "dom"],
     "suppressImplicitAnyIndexErrors": true,
     "moduleResolution": "node",
@@ -21,8 +21,13 @@
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "resolveJsonModule": true,
-    "skipLibCheck": true,
+    "skipLibCheck": true
   },
   "include": ["src"],
-  "exclude": ["**/tests/test-files", "**/tests/test-documents", "**/dist", "**/temp"]
+  "exclude": [
+    "**/tests/test-files",
+    "**/tests/test-documents",
+    "**/dist",
+    "**/temp"
+  ]
 }

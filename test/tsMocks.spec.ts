@@ -1,5 +1,6 @@
-import { plugin } from "../src/index"
 import { buildSchema, parse } from "graphql"
+
+import { plugin } from "../src/index"
 
 const schema = buildSchema(/* GraphQL */ `
   scalar Custom
@@ -53,6 +54,10 @@ const schema = buildSchema(/* GraphQL */ `
     testUnion: TestUnion!
     testInterface: TestInterface!
   }
+
+  type Mutation {
+    testMutation: TestType
+  }
 `)
 
 function buildDocuments(documents: string[]) {
@@ -62,7 +67,7 @@ function buildDocuments(documents: string[]) {
 it("handles list types", async () => {
   const documents = buildDocuments([
     /* GraphQL */ `
-      query testQuery {
+      query test {
         testType {
           list {
             string
@@ -71,7 +76,7 @@ it("handles list types", async () => {
       }
     `,
     /* GraphQL */ `
-      query testQuery2 {
+      query test2 {
         testType {
           stringList
         }
@@ -81,8 +86,8 @@ it("handles list types", async () => {
   const output = await plugin(schema, documents, {})
   expect(output.content.trim()).toEqual(
     [
-      "export const testQueryMock = { data: { testType: { list: [{ string: 'Hello World' }] } } };",
-      "export const testQuery2Mock = { data: { testType: { stringList: ['Hello World'] } } };",
+      "export const testQueryMock = { data: { testType: { list: [{ string: 'Hello World' }, { string: 'Hello World' }, { string: 'Hello World' }] } } };",
+      "export const test2QueryMock = { data: { testType: { stringList: ['Hello World', 'Hello World'] } } };",
     ].join("\n\n")
   )
 })
@@ -90,7 +95,7 @@ it("handles list types", async () => {
 it("mocks built in scalar values", async () => {
   const documents = buildDocuments([
     /* GraphQL */ `
-      query testQuery {
+      query test {
         testType {
           int
           float
@@ -110,7 +115,7 @@ it("mocks built in scalar values", async () => {
 it("handles __typename", async () => {
   const documents = buildDocuments([
     /* GraphQL */ `
-      query testQuery {
+      query test {
         testType {
           __typename
           testType {
@@ -125,14 +130,14 @@ it("handles __typename", async () => {
   ])
   const output = await plugin(schema, documents, {})
   expect(output.content.trim()).toEqual(
-    "export const testQueryMock = { data: { testType: { __typename: 'TestType', testType: { __typename: 'TestType' }, list: [{ __typename: 'TestType' }] } } };"
+    "export const testQueryMock = { data: { testType: { __typename: 'TestType', testType: { __typename: 'TestType' }, list: [{ __typename: 'TestType' }, { __typename: 'TestType' }, { __typename: 'TestType' }] } } };"
   )
 })
 
 it("does not render exports if noExport is true", async () => {
   const documents = buildDocuments([
     /* GraphQL */ `
-      query testQuery {
+      query test {
         testType {
           string
         }
@@ -148,7 +153,7 @@ it("does not render exports if noExport is true", async () => {
 it("adds name prefix if one is passed in config", async () => {
   const documents = buildDocuments([
     /* GraphQL */ `
-      query testQuery {
+      query test {
         testType {
           string
         }
@@ -164,7 +169,7 @@ it("adds name prefix if one is passed in config", async () => {
 it("allows a custom name suffix if one is passed in config", async () => {
   const documents = buildDocuments([
     /* GraphQL */ `
-      query testQuery {
+      query test {
         testType {
           string
         }
@@ -173,14 +178,14 @@ it("allows a custom name suffix if one is passed in config", async () => {
   ])
   const output = await plugin(schema, documents, { nameSuffix: "" })
   expect(output.content.trim()).toEqual(
-    "export const testQuery = { data: { testType: { string: 'Hello World' } } };"
+    "export const test = { data: { testType: { string: 'Hello World' } } };"
   )
 })
 
 it("handles aliasing field names", async () => {
   const documents = buildDocuments([
     /* GraphQL */ `
-      query testQuery {
+      query test {
         testType {
           testAlias: int
         }
@@ -213,8 +218,8 @@ it("gives a place holder name for unnamed operations", async () => {
   const output = await plugin(schema, documents, {})
   expect(output.content.trim()).toEqual(
     [
-      "export const unnamed_1_Mock = { data: { testType: { id: 'e509e6ea-9fee-442a-9962-587ce7190430' } } };",
-      "export const unnamed_2_Mock = { data: { testType: { string: 'Hello World' } } };",
+      "export const unnamed_1_QueryMock = { data: { testType: { id: 'e509e6ea-9fee-442a-9962-587ce7190430' } } };",
+      "export const unnamed_2_QueryMock = { data: { testType: { string: 'Hello World' } } };",
     ].join("\n\n")
   )
 })
@@ -222,7 +227,7 @@ it("gives a place holder name for unnamed operations", async () => {
 it("handles nested fields", async () => {
   const documents = buildDocuments([
     /* GraphQL */ `
-      query TestQuery {
+      query test {
         testType {
           testType {
             int
@@ -240,7 +245,7 @@ it("handles nested fields", async () => {
 it("uses type name as value for custom scalars", async () => {
   const documents = buildDocuments([
     /* GraphQL */ `
-      query TestQuery {
+      query test {
         testType {
           custom
         }
@@ -256,7 +261,7 @@ it("uses type name as value for custom scalars", async () => {
 it("allows defining string values for custom scalars using the scalarValues config", async () => {
   const documents = buildDocuments([
     /* GraphQL */ `
-      query TestQuery {
+      query test {
         testType {
           custom
         }
@@ -264,7 +269,7 @@ it("allows defining string values for custom scalars using the scalarValues conf
     `,
   ])
   const output = await plugin(schema, documents, {
-    customValues: { Custom: "test value" },
+    customScalarValues: { Custom: "test value" },
   })
   expect(output.content.trim()).toEqual(
     "export const testQueryMock = { data: { testType: { custom: 'test value' } } };"
@@ -274,7 +279,7 @@ it("allows defining string values for custom scalars using the scalarValues conf
 it("allows defining number values for custom scalars using the scalarValues config", async () => {
   const documents = buildDocuments([
     /* GraphQL */ `
-      query TestQuery {
+      query test {
         testType {
           custom
         }
@@ -282,7 +287,7 @@ it("allows defining number values for custom scalars using the scalarValues conf
     `,
   ])
   const output = await plugin(schema, documents, {
-    customValues: { Custom: 1234 },
+    customScalarValues: { Custom: 1234 },
   })
   expect(output.content.trim()).toEqual(
     "export const testQueryMock = { data: { testType: { custom: 1234 } } };"
@@ -292,7 +297,7 @@ it("allows defining number values for custom scalars using the scalarValues conf
 it("allows defining boolean values for custom scalars using the scalarValues config", async () => {
   const documents = buildDocuments([
     /* GraphQL */ `
-      query TestQuery {
+      query test {
         testType {
           custom
         }
@@ -300,7 +305,7 @@ it("allows defining boolean values for custom scalars using the scalarValues con
     `,
   ])
   const output = await plugin(schema, documents, {
-    customValues: { Custom: true },
+    customScalarValues: { Custom: true },
   })
   expect(output.content.trim()).toEqual(
     "export const testQueryMock = { data: { testType: { custom: true } } };"
@@ -310,7 +315,7 @@ it("allows defining boolean values for custom scalars using the scalarValues con
 it("allows built in scalar values to be overwritten with scalarValues config", async () => {
   const documents = buildDocuments([
     /* GraphQL */ `
-      query TestQuery {
+      query test {
         testType {
           int
         }
@@ -318,7 +323,7 @@ it("allows built in scalar values to be overwritten with scalarValues config", a
     `,
   ])
   const output = await plugin(schema, documents, {
-    customValues: { Int: 978654 },
+    customScalarValues: { Int: 978654 },
   })
   expect(output.content.trim()).toEqual(
     "export const testQueryMock = { data: { testType: { int: 978654 } } };"
@@ -328,7 +333,7 @@ it("allows built in scalar values to be overwritten with scalarValues config", a
 it("handles enum types", async () => {
   const documents = buildDocuments([
     /* GraphQL */ `
-      query TestQuery {
+      query test {
         testType {
           enum
         }
@@ -344,7 +349,7 @@ it("handles enum types", async () => {
 it("handles unions", async () => {
   const documents = buildDocuments([
     /* GraphQL */ `
-      query TestQuery {
+      query test {
         testUnion {
           __typename
           ... on TestSubType1 {
@@ -368,7 +373,7 @@ it("handles unions", async () => {
 it("handles interfaces", async () => {
   const documents = buildDocuments([
     /* GraphQL */ `
-      query TestQuery {
+      query test {
         testInterface {
           __typename
           ... on TestInterfaceType1 {
@@ -388,7 +393,7 @@ it("handles interfaces", async () => {
 it("handles fragments", async () => {
   const documents = buildDocuments([
     /* GraphQL */ `
-      query TestQuery {
+      query test {
         testType {
           ...testFragment
         }
@@ -410,7 +415,7 @@ it("handles fragments", async () => {
 it("handles nested fragments", async () => {
   const documents = buildDocuments([
     /* GraphQL */ `
-      query TestQuery {
+      query test {
         testType {
           ...testFragment
         }
@@ -436,7 +441,7 @@ it("handles nested fragments", async () => {
 it("does not prepend ExecutionResult import if output is not a .ts or .tsx file", async () => {
   const documents = buildDocuments([
     /* GraphQL */ `
-      query testQuery {
+      query test {
         testType {
           string
         }
@@ -453,7 +458,7 @@ it("does not prepend ExecutionResult import if output is not a .ts or .tsx file"
 it("adds TypeScript specific code if output file is a .ts file", async () => {
   const documents = buildDocuments([
     /* GraphQL */ `
-      query testQuery {
+      query test {
         testType {
           string
         }
@@ -462,7 +467,7 @@ it("adds TypeScript specific code if output file is a .ts file", async () => {
   ])
   const output = await plugin(schema, documents, {}, { outputFile: "test.ts" })
   expect(output.content.trim()).toEqual(
-    "export const testQueryMock: ExecutionResult<TestQueryQuery> = { data: { testType: { string: 'Hello World' } } };"
+    "export const testQueryMock: ExecutionResult<TestQuery> = { data: { testType: { string: 'Hello World' } } };"
   )
   expect(output.prepend[0]).toEqual("import { ExecutionResult } from 'graphql'")
 })
@@ -470,7 +475,7 @@ it("adds TypeScript specific code if output file is a .ts file", async () => {
 it("adds TypeScript specific code if output file is a .tsx file", async () => {
   const documents = buildDocuments([
     /* GraphQL */ `
-      query testQuery {
+      query test {
         testType {
           string
         }
@@ -479,7 +484,93 @@ it("adds TypeScript specific code if output file is a .tsx file", async () => {
   ])
   const output = await plugin(schema, documents, {}, { outputFile: "test.tsx" })
   expect(output.content.trim()).toEqual(
-    "export const testQueryMock: ExecutionResult<TestQueryQuery> = { data: { testType: { string: 'Hello World' } } };"
+    "export const testQueryMock: ExecutionResult<TestQuery> = { data: { testType: { string: 'Hello World' } } };"
   )
   expect(output.prepend[0]).toEqual("import { ExecutionResult } from 'graphql'")
+})
+
+it("handles mutations", async () => {
+  const documents = buildDocuments([
+    /* GraphQL */ `
+      mutation test {
+        testMutation {
+          string
+        }
+      }
+    `,
+  ])
+  const output = await plugin(schema, documents, {})
+  expect(output.content.trim()).toEqual(
+    "export const testMutationMock = { data: { testMutation: { string: 'Hello World' } } };"
+  )
+})
+
+it("adds typenames if addTypename is set in config", async () => {
+  const documents = buildDocuments([
+    /* GraphQL */ `
+      query test {
+        testType {
+          string
+        }
+      }
+    `,
+  ])
+  const output = await plugin(schema, documents, { addTypename: true })
+  expect(output.content.trim()).toEqual(
+    "export const testQueryMock = { data: { __typename: 'Query', testType: { __typename: 'TestType', string: 'Hello World' } } };"
+  )
+})
+
+it("does not add extra __typename to object that is already querying for it", async () => {
+  const documents = buildDocuments([
+    /* GraphQL */ `
+      query test {
+        testType {
+          string
+          __typename
+        }
+      }
+    `,
+  ])
+  const output = await plugin(schema, documents, { addTypename: true })
+  expect(output.content.trim()).toEqual(
+    "export const testQueryMock = { data: { __typename: 'Query', testType: { string: 'Hello World', __typename: 'TestType' } } };"
+  )
+})
+
+it("renders immutable result if the config option is set", async () => {
+  const documents = buildDocuments([
+    /* GraphQL */ `
+      query test {
+        testType {
+          string
+        }
+      }
+    `,
+  ])
+  const output = await plugin(
+    schema,
+    documents,
+    { immutableResults: true },
+    { outputFile: "output.ts" }
+  )
+  expect(output.content.trim()).toEqual(
+    "export const testQueryMock: ExecutionResult<ReadOnly<TestQuery>> = { data: { testType: { string: 'Hello World' } } } as const;"
+  )
+})
+
+it("does not render immutable result if the config option is set but file is not TypeScript", async () => {
+  const documents = buildDocuments([
+    /* GraphQL */ `
+      query test {
+        testType {
+          string
+        }
+      }
+    `,
+  ])
+  const output = await plugin(schema, documents, { immutableResults: true })
+  expect(output.content.trim()).toEqual(
+    "export const testQueryMock = { data: { testType: { string: 'Hello World' } } };"
+  )
 })

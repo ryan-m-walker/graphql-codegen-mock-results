@@ -1,33 +1,64 @@
 {
-  "name": "graphql-mocks",
+  "name": "graphql-codegen-mock-results",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/index.js",
   "license": "MIT",
+  "author": "Ryan Walker <ryan.matthew.walker@gmail.com>",
+  "description": "GraphQL Code Generator plugin for generating mock results GraphQL operations",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ryan-m-walker/graphql-codegen-mock-results.git"
+  },
+  "scripts": {
+    "test": "jest",
+    "lint": "eslint --ext .ts .",
+    "lint:fix": "yarn lint --fix",
+    "clean": "rimraf dist",
+    "build": "yarn clean && tsc"
+  },
   "dependencies": {
-    "@graphql-codegen/cli": "^1.19.1",
     "@graphql-codegen/plugin-helpers": "^1.18.1",
-    "@graphql-codegen/typescript": "^1.17.11",
-    "@graphql-codegen/typescript-document-nodes": "^1.17.8",
     "@graphql-codegen/visitor-plugin-common": "^1.17.17",
-    "@graphql-tools/mock": "^7.0.0",
-    "@graphql-tools/utils": "^7.0.2",
-    "@types/seed-random": "^2.2.0",
-    "graphql": "^15.4.0",
-    "prettier": "^2.1.2",
     "seed-random": "^2.2.0"
   },
-  "peerDependencies": {},
+  "peerDependencies": {
+    "graphql": "^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0"
+  },
   "devDependencies": {
     "@babel/preset-env": "^7.12.1",
     "@babel/preset-typescript": "^7.12.1",
     "@graphql-codegen/typescript-operations": "^1.17.10",
     "@types/jest": "^26.0.15",
+    "@types/seed-random": "^2.2.0",
+    "@typescript-eslint/eslint-plugin": "^4.9.0",
+    "@typescript-eslint/parser": "^4.9.0",
+    "eslint": "^7.14.0",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-prettier": "^3.2.0",
+    "graphql": "^15.4.0",
+    "husky": "^4.3.0",
     "jest": "^26.6.3",
+    "lint-staged": "^10.5.3",
+    "prettier": "^2.2.1",
     "typescript": "^4.1.2"
   },
-  "scripts": {
-    "codegen": "graphql-codegen",
-    "test": "jest",
-    "build": "tsc"
+  "typings": "dist/index.d.ts",
+  "typescript": {
+    "definition": "dist/index.d.ts"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "**/*.ts": [
+      "eslint --fix"
+    ],
+    "**/*.{graphql,yml,json}": [
+      "prettier --write"
+    ]
   }
 }
