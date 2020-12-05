@@ -2647,7 +2647,7 @@
         "./node_modules/@graphql-codegen/plugin-helpers/utils.d.ts"
       ],
       "./node_modules/@graphql-codegen/plugin-helpers/types.d.ts": [
-        "./node_modules/@graphql-codegen/plugin-helpers/node_modules/@graphql-tools/utils/index.d.ts",
+        "./node_modules/@graphql-tools/utils/index.d.ts",
         "./node_modules/graphql/index.d.ts"
       ],
       "./node_modules/@graphql-codegen/plugin-helpers/utils.d.ts": [
