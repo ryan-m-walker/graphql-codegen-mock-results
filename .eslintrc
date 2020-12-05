@@ -32,7 +32,8 @@
     "import/no-duplicates": ["error"],
     "prettier/prettier": "error",
     "no-console": "error",
-    "@typescript-eslint/no-explicit-any": "off"
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-unused-vars": "error"
   },
   "env": {
     "es6": true,
