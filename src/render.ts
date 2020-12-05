@@ -4,6 +4,7 @@ import {
   OperationDefinitionNode,
   getOperationRootType,
 } from "graphql"
+import type { JsonValue } from "type-fest"
 
 import { MocksPluginConfig } from "./config"
 import { capitalize, toPascalCase } from "./utils"
@@ -87,4 +88,11 @@ function renderReadOnly(value: string, shouldRender: boolean) {
   }
 
   return `ReadOnly<${value}>`
+}
+
+export function renderCustomScalarValue(input: JsonValue): string {
+  if (input === null) return "null"
+  if (typeof input === "string") return `'${input}'`
+  if (typeof input === "object") return JSON.stringify(input)
+  return input.toString()
 }

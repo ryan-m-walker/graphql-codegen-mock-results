@@ -20,6 +20,7 @@ import {
 
 import { MocksPluginConfig } from "./config"
 import { randomFactory, RandomFn } from "./random"
+import { renderCustomScalarValue } from "./render"
 import {
   ExecutionContext,
   FieldsMap,
@@ -175,11 +176,8 @@ function handleNamedType(
 
   if (isScalarType(type)) {
     const customScalarValue = context.config?.customScalarValues?.[type.name]
-    if (customScalarValue) {
-      if (typeof customScalarValue === "string") {
-        return `'${customScalarValue}'`
-      }
-      return `${customScalarValue}`
+    if (customScalarValue !== undefined) {
+      return renderCustomScalarValue(customScalarValue)
     } else if (scalarToValue[type.name]) {
       return `${scalarToValue[type.name]()}`
     }

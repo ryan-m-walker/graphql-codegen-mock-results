@@ -574,3 +574,61 @@ it("does not render immutable result if the config option is set but file is not
     "export const testQueryMock = { data: { testType: { string: 'Hello World' } } };"
   )
 })
+
+it("renders custom scalar null values correctly", async () => {
+  const documents = buildDocuments([
+    /* GraphQL */ `
+      query test {
+        testType {
+          custom
+        }
+      }
+    `,
+  ])
+  const output = await plugin(schema, documents, {
+    customScalarValues: { Custom: null },
+  })
+  expect(output.content.trim()).toEqual(
+    "export const testQueryMock = { data: { testType: { custom: null } } };"
+  )
+})
+
+it("renders custom scalar object values correctly", async () => {
+  const documents = buildDocuments([
+    /* GraphQL */ `
+      query test {
+        testType {
+          custom
+        }
+      }
+    `,
+  ])
+  const output = await plugin(schema, documents, {
+    customScalarValues: {
+      Custom: { string: "Hello World", number: 123, bool: false },
+    },
+  })
+  expect(output.content.trim()).toEqual(
+    'export const testQueryMock = { data: { testType: { custom: {"string":"Hello World","number":123,"bool":false} } } };'
+  )
+})
+
+it("renders custom scalar array values correctly", async () => {
+  const documents = buildDocuments([
+    /* GraphQL */ `
+      query test {
+        testType {
+          custom
+        }
+      }
+    `,
+  ])
+  const output = await plugin(schema, documents, {
+    customScalarValues: {
+      Custom: [1, 2, 3],
+    },
+  })
+  expect(output.content.trim()).toEqual(
+    "export const testQueryMock = { data: { testType: { custom: [1,2,3] } } };"
+  )
+})

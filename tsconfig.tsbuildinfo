@@ -726,14 +726,24 @@
         "signature": "7e8313097979ca2656fe1d672f0cd456f21eed6017f3df3457877daa145787db",
         "affectsGlobalScope": false
       },
-      "./src/types.ts": {
-        "version": "77e1cedb0f05be4ca21481e846640eceb2b63535216954214c52a5ad1e56f958",
-        "signature": "a59cbe97e2e4290a1d37e69f283a38cd92856ae253b199c77a0933c4729a7c84",
+      "./node_modules/@graphql-codegen/visitor-plugin-common/utils.d.ts": {
+        "version": "f6e588adff8e65130a613f14bd040ddbb16cb407341e82ba77d4ebb96afa7c3b",
+        "signature": "f6e588adff8e65130a613f14bd040ddbb16cb407341e82ba77d4ebb96afa7c3b",
         "affectsGlobalScope": false
       },
-      "./src/execute.ts": {
-        "version": "0c0d4c4ead1f8c2904b507519ecf6cb540b942b8efb26600ee00318fb917ee03",
-        "signature": "0fa151fc6d674295e9b3f482ef09ba5f65d7a9a8e6a79b95a578b8465aad9a32",
+      "./node_modules/@graphql-codegen/visitor-plugin-common/imports.d.ts": {
+        "version": "29a3c28462ed78743b34b33e8a845086c9f47e73eb092662c74e79077e3f4a64",
+        "signature": "29a3c28462ed78743b34b33e8a845086c9f47e73eb092662c74e79077e3f4a64",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@graphql-codegen/visitor-plugin-common/base-visitor.d.ts": {
+        "version": "d3ba6287d5cd7622c308e0039af7e9310fb29a560fcf5c2ff11932e629dffe18",
+        "signature": "d3ba6287d5cd7622c308e0039af7e9310fb29a560fcf5c2ff11932e629dffe18",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@graphql-codegen/visitor-plugin-common/variables-to-object.d.ts": {
+        "version": "282dd8f52d1361aac2c08d2333f5dde572b3518873ac4ae5b2c11a94fafb1656",
+        "signature": "282dd8f52d1361aac2c08d2333f5dde572b3518873ac4ae5b2c11a94fafb1656",
         "affectsGlobalScope": false
       },
       "./node_modules/@graphql-codegen/plugin-helpers/resolve-external-module-and-fn.d.ts": {
@@ -1031,31 +1041,6 @@
         "signature": "04a57a2e40b72b5cfe950f17e8192f716972a9a85303191263d627e4b7e2ba75",
         "affectsGlobalScope": false
       },
-      "./node_modules/@types/seed-random/index.d.ts": {
-        "version": "54a0760bac71a85349a00f6c4116b108d7c5b81b2d08c95b60abb73ada3fbd8b",
-        "signature": "54a0760bac71a85349a00f6c4116b108d7c5b81b2d08c95b60abb73ada3fbd8b",
-        "affectsGlobalScope": false
-      },
-      "./node_modules/@graphql-codegen/visitor-plugin-common/utils.d.ts": {
-        "version": "f6e588adff8e65130a613f14bd040ddbb16cb407341e82ba77d4ebb96afa7c3b",
-        "signature": "f6e588adff8e65130a613f14bd040ddbb16cb407341e82ba77d4ebb96afa7c3b",
-        "affectsGlobalScope": false
-      },
-      "./node_modules/@graphql-codegen/visitor-plugin-common/imports.d.ts": {
-        "version": "29a3c28462ed78743b34b33e8a845086c9f47e73eb092662c74e79077e3f4a64",
-        "signature": "29a3c28462ed78743b34b33e8a845086c9f47e73eb092662c74e79077e3f4a64",
-        "affectsGlobalScope": false
-      },
-      "./node_modules/@graphql-codegen/visitor-plugin-common/base-visitor.d.ts": {
-        "version": "d3ba6287d5cd7622c308e0039af7e9310fb29a560fcf5c2ff11932e629dffe18",
-        "signature": "d3ba6287d5cd7622c308e0039af7e9310fb29a560fcf5c2ff11932e629dffe18",
-        "affectsGlobalScope": false
-      },
-      "./node_modules/@graphql-codegen/visitor-plugin-common/variables-to-object.d.ts": {
-        "version": "282dd8f52d1361aac2c08d2333f5dde572b3518873ac4ae5b2c11a94fafb1656",
-        "signature": "282dd8f52d1361aac2c08d2333f5dde572b3518873ac4ae5b2c11a94fafb1656",
-        "affectsGlobalScope": false
-      },
       "./node_modules/@graphql-codegen/visitor-plugin-common/base-resolvers-visitor.d.ts": {
         "version": "d5c488d87c36b19691edf6642e9e7b4bf657b0030c1a34e04c09c841212b061a",
         "signature": "d5c488d87c36b19691edf6642e9e7b4bf657b0030c1a34e04c09c841212b061a",
@@ -1136,14 +1121,219 @@
         "signature": "597b54c49e5a09c112a50d92d7c9121fb8efed23857aa87ad747a607e93c5d8d",
         "affectsGlobalScope": false
       },
+      "./node_modules/type-fest/source/basic.d.ts": {
+        "version": "f20c9c09c8a0fea4784952305a937bdb092417908bad669dc789d3e54d8a5386",
+        "signature": "f20c9c09c8a0fea4784952305a937bdb092417908bad669dc789d3e54d8a5386",
+        "affectsGlobalScope": true
+      },
+      "./node_modules/type-fest/source/except.d.ts": {
+        "version": "c58be3e560989a877531d3ff7c9e5db41c5dd9282480ccf197abfcc708a95b8d",
+        "signature": "c58be3e560989a877531d3ff7c9e5db41c5dd9282480ccf197abfcc708a95b8d",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/type-fest/source/mutable.d.ts": {
+        "version": "91f23ddc3971b1c8938c638fb55601a339483953e1eb800675fa5b5e8113db72",
+        "signature": "91f23ddc3971b1c8938c638fb55601a339483953e1eb800675fa5b5e8113db72",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/type-fest/source/merge.d.ts": {
+        "version": "50d22844db90a0dcd359afeb59dd1e9a384d977b4b363c880b4e65047237a29e",
+        "signature": "50d22844db90a0dcd359afeb59dd1e9a384d977b4b363c880b4e65047237a29e",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/type-fest/source/merge-exclusive.d.ts": {
+        "version": "d33782b82eea0ee17b99ca563bd19b38259a3aaf096d306ceaf59cd4422629be",
+        "signature": "d33782b82eea0ee17b99ca563bd19b38259a3aaf096d306ceaf59cd4422629be",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/type-fest/source/require-at-least-one.d.ts": {
+        "version": "55a84db1ca921c86709117fabae152ab802511dd395c26d6049e6d4fb1e78112",
+        "signature": "55a84db1ca921c86709117fabae152ab802511dd395c26d6049e6d4fb1e78112",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/type-fest/source/require-exactly-one.d.ts": {
+        "version": "2d14198b25428b7b8010a895085add8edfaae476ab863c0c15fe2867fc214fe4",
+        "signature": "2d14198b25428b7b8010a895085add8edfaae476ab863c0c15fe2867fc214fe4",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/type-fest/source/partial-deep.d.ts": {
+        "version": "61046f12c3cfafd353d2d03febc96b441c1a0e3bb82a5a88de78cc1be9e10520",
+        "signature": "61046f12c3cfafd353d2d03febc96b441c1a0e3bb82a5a88de78cc1be9e10520",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/type-fest/source/readonly-deep.d.ts": {
+        "version": "f4e7f5824ac7b35539efc3bef36b3e6be89603b88224cb5c0ad3526a454fc895",
+        "signature": "f4e7f5824ac7b35539efc3bef36b3e6be89603b88224cb5c0ad3526a454fc895",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/type-fest/source/literal-union.d.ts": {
+        "version": "b29ef0a32e75e0d2a08762d6af502c0ffcd7a83fec07ed7a153e95329b89d761",
+        "signature": "b29ef0a32e75e0d2a08762d6af502c0ffcd7a83fec07ed7a153e95329b89d761",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/type-fest/source/promisable.d.ts": {
+        "version": "537aff717746703d2157ec563b5de4f6393ce9f69a84ae62b49e9b6c80b6e587",
+        "signature": "537aff717746703d2157ec563b5de4f6393ce9f69a84ae62b49e9b6c80b6e587",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/type-fest/source/opaque.d.ts": {
+        "version": "d4220a16027ddf0cc7d105d80cbb01f5070ca7ddd8b2d007cfb024b27e22b912",
+        "signature": "d4220a16027ddf0cc7d105d80cbb01f5070ca7ddd8b2d007cfb024b27e22b912",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/type-fest/source/set-optional.d.ts": {
+        "version": "fb3aa3fb5f4fcd0d57d389a566c962e92dbfdaea3c38e3eaf27d466e168871c6",
+        "signature": "fb3aa3fb5f4fcd0d57d389a566c962e92dbfdaea3c38e3eaf27d466e168871c6",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/type-fest/source/set-required.d.ts": {
+        "version": "0af1485d84516c1a080c1f4569fea672caac8051e29f33733bf8d01df718d213",
+        "signature": "0af1485d84516c1a080c1f4569fea672caac8051e29f33733bf8d01df718d213",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/type-fest/source/value-of.d.ts": {
+        "version": "69630ad0e50189fb7a6b8f138c5492450394cb45424a903c8b53b2d5dd1dbce2",
+        "signature": "69630ad0e50189fb7a6b8f138c5492450394cb45424a903c8b53b2d5dd1dbce2",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/type-fest/source/promise-value.d.ts": {
+        "version": "c585e44fdf120eba5f6b12c874966f152792af727115570b21cb23574f465ce1",
+        "signature": "c585e44fdf120eba5f6b12c874966f152792af727115570b21cb23574f465ce1",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/type-fest/source/async-return-type.d.ts": {
+        "version": "8e067d3c170e56dfe3502fc8ebd092ae76a5235baad6f825726f3bbcc8a3836a",
+        "signature": "8e067d3c170e56dfe3502fc8ebd092ae76a5235baad6f825726f3bbcc8a3836a",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/type-fest/source/conditional-keys.d.ts": {
+        "version": "ae7f57067310d6c4acbc4862b91b5799e88831f4ab77f865443a9bc5057b540a",
+        "signature": "ae7f57067310d6c4acbc4862b91b5799e88831f4ab77f865443a9bc5057b540a",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/type-fest/source/conditional-except.d.ts": {
+        "version": "955d0c60502897e9735fcd08d2c1ad484b6166786328b89386074aebcd735776",
+        "signature": "955d0c60502897e9735fcd08d2c1ad484b6166786328b89386074aebcd735776",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/type-fest/source/conditional-pick.d.ts": {
+        "version": "2fa69d202a513f2a6553f263d473cba85d598ce250261715d78e8aab42df6b93",
+        "signature": "2fa69d202a513f2a6553f263d473cba85d598ce250261715d78e8aab42df6b93",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/type-fest/source/union-to-intersection.d.ts": {
+        "version": "55480aa69f3984607fa60b3862b5cd24c2ee7bdd4edaed1eef6a8b46554e947f",
+        "signature": "55480aa69f3984607fa60b3862b5cd24c2ee7bdd4edaed1eef6a8b46554e947f",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/type-fest/source/stringified.d.ts": {
+        "version": "3c19e77a05c092cab5f4fd57f6864aa2657f3ad524882f917a05fdb025905199",
+        "signature": "3c19e77a05c092cab5f4fd57f6864aa2657f3ad524882f917a05fdb025905199",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/type-fest/source/fixed-length-array.d.ts": {
+        "version": "708350608d7483a4c585233b95d2dc86d992d36e7da312d5802e9a8837b5829d",
+        "signature": "708350608d7483a4c585233b95d2dc86d992d36e7da312d5802e9a8837b5829d",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/type-fest/source/iterable-element.d.ts": {
+        "version": "41ceb13974711a87f182145196a641ad804125baf1fca181595f1be8cb0a2cc1",
+        "signature": "41ceb13974711a87f182145196a641ad804125baf1fca181595f1be8cb0a2cc1",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/type-fest/source/entry.d.ts": {
+        "version": "13897f9cb8ddf535e2cc6448942410f18298c1540338c1276a17880362b1eb45",
+        "signature": "13897f9cb8ddf535e2cc6448942410f18298c1540338c1276a17880362b1eb45",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/type-fest/source/entries.d.ts": {
+        "version": "4d2f7644abb97ec0d681d89b455170cf2bd0e72ee2a3e52d396074d0def264c4",
+        "signature": "4d2f7644abb97ec0d681d89b455170cf2bd0e72ee2a3e52d396074d0def264c4",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/type-fest/source/set-return-type.d.ts": {
+        "version": "671da85fc40086ce6f7309c428511bd77aebc0405b88700a26590a75cf37ff10",
+        "signature": "671da85fc40086ce6f7309c428511bd77aebc0405b88700a26590a75cf37ff10",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/type-fest/source/asyncify.d.ts": {
+        "version": "6e95aab5b3ba30cdbc9d4ad350ae7cbeb519a1eda30a214d2b1ec1f53eecdf9c",
+        "signature": "6e95aab5b3ba30cdbc9d4ad350ae7cbeb519a1eda30a214d2b1ec1f53eecdf9c",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/type-fest/source/package-json.d.ts": {
+        "version": "e11ff96a6e720e91e52ac54c53ee5bea99929bf096ae6b34bca2276e2b277ef8",
+        "signature": "e11ff96a6e720e91e52ac54c53ee5bea99929bf096ae6b34bca2276e2b277ef8",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/type-fest/source/tsconfig-json.d.ts": {
+        "version": "08ce78e8c4c047bb08ccadc6587f6b45f025d85829854199db891cf1de7b209e",
+        "signature": "08ce78e8c4c047bb08ccadc6587f6b45f025d85829854199db891cf1de7b209e",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/type-fest/base.d.ts": {
+        "version": "3afed5176dbb8e33d3366dff69f6fb0948b6849e0d2b53f6d61f41357cd617a3",
+        "signature": "3afed5176dbb8e33d3366dff69f6fb0948b6849e0d2b53f6d61f41357cd617a3",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/type-fest/source/utilities.d.ts": {
+        "version": "51f8343ee830b7003a644ac90122bd092413344f957f9f9bec64d5945f179927",
+        "signature": "51f8343ee830b7003a644ac90122bd092413344f957f9f9bec64d5945f179927",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/type-fest/ts41/camel-case.d.ts": {
+        "version": "15eb363cdbe0004d3db00bce07892a5f5eb55d281761f768ee0545df54b04a0c",
+        "signature": "15eb363cdbe0004d3db00bce07892a5f5eb55d281761f768ee0545df54b04a0c",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/type-fest/ts41/delimiter-case.d.ts": {
+        "version": "9b83354a819146569dfe74a2468b7c11e287286d58b5654555ed1fec10688649",
+        "signature": "9b83354a819146569dfe74a2468b7c11e287286d58b5654555ed1fec10688649",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/type-fest/ts41/kebab-case.d.ts": {
+        "version": "e90e58ad52b0d25a238f6a794be594bf647280a6e8478b2337ff729dce62a63c",
+        "signature": "e90e58ad52b0d25a238f6a794be594bf647280a6e8478b2337ff729dce62a63c",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/type-fest/ts41/pascal-case.d.ts": {
+        "version": "ea1393c82a0cd229de6915d3682db9571c9b65803b971a04f6042bd3b3826b60",
+        "signature": "ea1393c82a0cd229de6915d3682db9571c9b65803b971a04f6042bd3b3826b60",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/type-fest/ts41/snake-case.d.ts": {
+        "version": "d4978c3f743921aefd2609c001cf4a6baf74dd5e67337b5088bb29cb6d832ebb",
+        "signature": "d4978c3f743921aefd2609c001cf4a6baf74dd5e67337b5088bb29cb6d832ebb",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/type-fest/ts41/index.d.ts": {
+        "version": "973aa2a5bc9b967d9c2ada4edc050ffe2832b09860bfa0ba0cb79b8253e81dd6",
+        "signature": "973aa2a5bc9b967d9c2ada4edc050ffe2832b09860bfa0ba0cb79b8253e81dd6",
+        "affectsGlobalScope": false
+      },
       "./src/utils.ts": {
         "version": "b47978c4b6d1e1800584a395cdd0f99632d39696c2d48c75a46779dafac3caf5",
         "signature": "374bc3ddcc499aa1499e777bf94bcef3b821f8b47026816f51811bf5d2f31cee",
         "affectsGlobalScope": false
       },
       "./src/render.ts": {
-        "version": "d341ee5a36f666bfd728b7f1864c1d7f548468eb0c519a976cff81e25dee0e29",
-        "signature": "36fe11416fc5671432fc201df39727ad72edc0e1958838fbcbf20b5b3fcd9bac",
+        "version": "9c731e59e8610a24a1c3f49475f68570e579e5d1d59fee305d2cc9c1d7f0ff41",
+        "signature": "84c9df4018f42202581927d495f3aadf6e15637db9fd88f6e30d16a3bfed3572",
+        "affectsGlobalScope": false
+      },
+      "./src/types.ts": {
+        "version": "77e1cedb0f05be4ca21481e846640eceb2b63535216954214c52a5ad1e56f958",
+        "signature": "a59cbe97e2e4290a1d37e69f283a38cd92856ae253b199c77a0933c4729a7c84",
+        "affectsGlobalScope": false
+      },
+      "./src/execute.ts": {
+        "version": "d148273d50c01a28bc4ca240aaced234436e3703ee842bfb6769f12aa7894c1d",
+        "signature": "0fa151fc6d674295e9b3f482ef09ba5f65d7a9a8e6a79b95a578b8465aad9a32",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/seed-random/index.d.ts": {
+        "version": "54a0760bac71a85349a00f6c4116b108d7c5b81b2d08c95b60abb73ada3fbd8b",
+        "signature": "54a0760bac71a85349a00f6c4116b108d7c5b81b2d08c95b60abb73ada3fbd8b",
         "affectsGlobalScope": false
       },
       "./src/index.ts": {
@@ -2587,6 +2777,102 @@
       "./node_modules/pretty-format/build/index.d.ts": [
         "./node_modules/pretty-format/build/types.d.ts"
       ],
+      "./node_modules/type-fest/base.d.ts": [
+        "./node_modules/type-fest/source/async-return-type.d.ts",
+        "./node_modules/type-fest/source/asyncify.d.ts",
+        "./node_modules/type-fest/source/basic.d.ts",
+        "./node_modules/type-fest/source/conditional-except.d.ts",
+        "./node_modules/type-fest/source/conditional-keys.d.ts",
+        "./node_modules/type-fest/source/conditional-pick.d.ts",
+        "./node_modules/type-fest/source/entries.d.ts",
+        "./node_modules/type-fest/source/entry.d.ts",
+        "./node_modules/type-fest/source/except.d.ts",
+        "./node_modules/type-fest/source/fixed-length-array.d.ts",
+        "./node_modules/type-fest/source/iterable-element.d.ts",
+        "./node_modules/type-fest/source/literal-union.d.ts",
+        "./node_modules/type-fest/source/merge-exclusive.d.ts",
+        "./node_modules/type-fest/source/merge.d.ts",
+        "./node_modules/type-fest/source/mutable.d.ts",
+        "./node_modules/type-fest/source/opaque.d.ts",
+        "./node_modules/type-fest/source/package-json.d.ts",
+        "./node_modules/type-fest/source/partial-deep.d.ts",
+        "./node_modules/type-fest/source/promisable.d.ts",
+        "./node_modules/type-fest/source/promise-value.d.ts",
+        "./node_modules/type-fest/source/readonly-deep.d.ts",
+        "./node_modules/type-fest/source/require-at-least-one.d.ts",
+        "./node_modules/type-fest/source/require-exactly-one.d.ts",
+        "./node_modules/type-fest/source/set-optional.d.ts",
+        "./node_modules/type-fest/source/set-required.d.ts",
+        "./node_modules/type-fest/source/set-return-type.d.ts",
+        "./node_modules/type-fest/source/stringified.d.ts",
+        "./node_modules/type-fest/source/tsconfig-json.d.ts",
+        "./node_modules/type-fest/source/union-to-intersection.d.ts",
+        "./node_modules/type-fest/source/value-of.d.ts"
+      ],
+      "./node_modules/type-fest/source/async-return-type.d.ts": [
+        "./node_modules/type-fest/source/promise-value.d.ts"
+      ],
+      "./node_modules/type-fest/source/asyncify.d.ts": [
+        "./node_modules/type-fest/source/promise-value.d.ts",
+        "./node_modules/type-fest/source/set-return-type.d.ts"
+      ],
+      "./node_modules/type-fest/source/conditional-except.d.ts": [
+        "./node_modules/type-fest/source/conditional-keys.d.ts",
+        "./node_modules/type-fest/source/except.d.ts"
+      ],
+      "./node_modules/type-fest/source/conditional-pick.d.ts": [
+        "./node_modules/type-fest/source/conditional-keys.d.ts"
+      ],
+      "./node_modules/type-fest/source/entries.d.ts": [
+        "./node_modules/type-fest/source/entry.d.ts"
+      ],
+      "./node_modules/type-fest/source/literal-union.d.ts": [
+        "./node_modules/type-fest/source/basic.d.ts"
+      ],
+      "./node_modules/type-fest/source/merge.d.ts": [
+        "./node_modules/type-fest/source/except.d.ts"
+      ],
+      "./node_modules/type-fest/source/package-json.d.ts": [
+        "./node_modules/type-fest/source/literal-union.d.ts"
+      ],
+      "./node_modules/type-fest/source/partial-deep.d.ts": [
+        "./node_modules/type-fest/source/basic.d.ts"
+      ],
+      "./node_modules/type-fest/source/readonly-deep.d.ts": [
+        "./node_modules/type-fest/source/basic.d.ts"
+      ],
+      "./node_modules/type-fest/source/require-at-least-one.d.ts": [
+        "./node_modules/type-fest/source/except.d.ts"
+      ],
+      "./node_modules/type-fest/source/set-optional.d.ts": [
+        "./node_modules/type-fest/source/except.d.ts"
+      ],
+      "./node_modules/type-fest/source/set-required.d.ts": [
+        "./node_modules/type-fest/source/except.d.ts"
+      ],
+      "./node_modules/type-fest/ts41/camel-case.d.ts": [
+        "./node_modules/type-fest/source/utilities.d.ts"
+      ],
+      "./node_modules/type-fest/ts41/delimiter-case.d.ts": [
+        "./node_modules/type-fest/source/utilities.d.ts"
+      ],
+      "./node_modules/type-fest/ts41/index.d.ts": [
+        "./node_modules/type-fest/base.d.ts",
+        "./node_modules/type-fest/ts41/camel-case.d.ts",
+        "./node_modules/type-fest/ts41/delimiter-case.d.ts",
+        "./node_modules/type-fest/ts41/kebab-case.d.ts",
+        "./node_modules/type-fest/ts41/pascal-case.d.ts",
+        "./node_modules/type-fest/ts41/snake-case.d.ts"
+      ],
+      "./node_modules/type-fest/ts41/kebab-case.d.ts": [
+        "./node_modules/type-fest/ts41/delimiter-case.d.ts"
+      ],
+      "./node_modules/type-fest/ts41/pascal-case.d.ts": [
+        "./node_modules/type-fest/ts41/camel-case.d.ts"
+      ],
+      "./node_modules/type-fest/ts41/snake-case.d.ts": [
+        "./node_modules/type-fest/ts41/delimiter-case.d.ts"
+      ],
       "./src/config.ts": [
         "./node_modules/tslib/tslib.d.ts"
       ],
@@ -2595,6 +2881,7 @@
         "./node_modules/tslib/tslib.d.ts",
         "./src/config.ts",
         "./src/random.ts",
+        "./src/render.ts",
         "./src/types.ts"
       ],
       "./src/index.ts": [
@@ -2614,6 +2901,7 @@
         "./node_modules/@graphql-codegen/visitor-plugin-common/index.d.ts",
         "./node_modules/graphql/index.d.ts",
         "./node_modules/tslib/tslib.d.ts",
+        "./node_modules/type-fest/ts41/index.d.ts",
         "./src/config.ts",
         "./src/utils.ts"
       ],
@@ -3667,6 +3955,102 @@
       "./node_modules/pretty-format/build/index.d.ts": [
         "./node_modules/pretty-format/build/types.d.ts"
       ],
+      "./node_modules/type-fest/base.d.ts": [
+        "./node_modules/type-fest/source/async-return-type.d.ts",
+        "./node_modules/type-fest/source/asyncify.d.ts",
+        "./node_modules/type-fest/source/basic.d.ts",
+        "./node_modules/type-fest/source/conditional-except.d.ts",
+        "./node_modules/type-fest/source/conditional-keys.d.ts",
+        "./node_modules/type-fest/source/conditional-pick.d.ts",
+        "./node_modules/type-fest/source/entries.d.ts",
+        "./node_modules/type-fest/source/entry.d.ts",
+        "./node_modules/type-fest/source/except.d.ts",
+        "./node_modules/type-fest/source/fixed-length-array.d.ts",
+        "./node_modules/type-fest/source/iterable-element.d.ts",
+        "./node_modules/type-fest/source/literal-union.d.ts",
+        "./node_modules/type-fest/source/merge-exclusive.d.ts",
+        "./node_modules/type-fest/source/merge.d.ts",
+        "./node_modules/type-fest/source/mutable.d.ts",
+        "./node_modules/type-fest/source/opaque.d.ts",
+        "./node_modules/type-fest/source/package-json.d.ts",
+        "./node_modules/type-fest/source/partial-deep.d.ts",
+        "./node_modules/type-fest/source/promisable.d.ts",
+        "./node_modules/type-fest/source/promise-value.d.ts",
+        "./node_modules/type-fest/source/readonly-deep.d.ts",
+        "./node_modules/type-fest/source/require-at-least-one.d.ts",
+        "./node_modules/type-fest/source/require-exactly-one.d.ts",
+        "./node_modules/type-fest/source/set-optional.d.ts",
+        "./node_modules/type-fest/source/set-required.d.ts",
+        "./node_modules/type-fest/source/set-return-type.d.ts",
+        "./node_modules/type-fest/source/stringified.d.ts",
+        "./node_modules/type-fest/source/tsconfig-json.d.ts",
+        "./node_modules/type-fest/source/union-to-intersection.d.ts",
+        "./node_modules/type-fest/source/value-of.d.ts"
+      ],
+      "./node_modules/type-fest/source/async-return-type.d.ts": [
+        "./node_modules/type-fest/source/promise-value.d.ts"
+      ],
+      "./node_modules/type-fest/source/asyncify.d.ts": [
+        "./node_modules/type-fest/source/promise-value.d.ts",
+        "./node_modules/type-fest/source/set-return-type.d.ts"
+      ],
+      "./node_modules/type-fest/source/conditional-except.d.ts": [
+        "./node_modules/type-fest/source/conditional-keys.d.ts",
+        "./node_modules/type-fest/source/except.d.ts"
+      ],
+      "./node_modules/type-fest/source/conditional-pick.d.ts": [
+        "./node_modules/type-fest/source/conditional-keys.d.ts"
+      ],
+      "./node_modules/type-fest/source/entries.d.ts": [
+        "./node_modules/type-fest/source/entry.d.ts"
+      ],
+      "./node_modules/type-fest/source/literal-union.d.ts": [
+        "./node_modules/type-fest/source/basic.d.ts"
+      ],
+      "./node_modules/type-fest/source/merge.d.ts": [
+        "./node_modules/type-fest/source/except.d.ts"
+      ],
+      "./node_modules/type-fest/source/package-json.d.ts": [
+        "./node_modules/type-fest/source/literal-union.d.ts"
+      ],
+      "./node_modules/type-fest/source/partial-deep.d.ts": [
+        "./node_modules/type-fest/source/basic.d.ts"
+      ],
+      "./node_modules/type-fest/source/readonly-deep.d.ts": [
+        "./node_modules/type-fest/source/basic.d.ts"
+      ],
+      "./node_modules/type-fest/source/require-at-least-one.d.ts": [
+        "./node_modules/type-fest/source/except.d.ts"
+      ],
+      "./node_modules/type-fest/source/set-optional.d.ts": [
+        "./node_modules/type-fest/source/except.d.ts"
+      ],
+      "./node_modules/type-fest/source/set-required.d.ts": [
+        "./node_modules/type-fest/source/except.d.ts"
+      ],
+      "./node_modules/type-fest/ts41/camel-case.d.ts": [
+        "./node_modules/type-fest/source/utilities.d.ts"
+      ],
+      "./node_modules/type-fest/ts41/delimiter-case.d.ts": [
+        "./node_modules/type-fest/source/utilities.d.ts"
+      ],
+      "./node_modules/type-fest/ts41/index.d.ts": [
+        "./node_modules/type-fest/base.d.ts",
+        "./node_modules/type-fest/ts41/camel-case.d.ts",
+        "./node_modules/type-fest/ts41/delimiter-case.d.ts",
+        "./node_modules/type-fest/ts41/kebab-case.d.ts",
+        "./node_modules/type-fest/ts41/pascal-case.d.ts",
+        "./node_modules/type-fest/ts41/snake-case.d.ts"
+      ],
+      "./node_modules/type-fest/ts41/kebab-case.d.ts": [
+        "./node_modules/type-fest/ts41/delimiter-case.d.ts"
+      ],
+      "./node_modules/type-fest/ts41/pascal-case.d.ts": [
+        "./node_modules/type-fest/ts41/camel-case.d.ts"
+      ],
+      "./node_modules/type-fest/ts41/snake-case.d.ts": [
+        "./node_modules/type-fest/ts41/delimiter-case.d.ts"
+      ],
       "./src/execute.ts": [
         "./node_modules/graphql/index.d.ts",
         "./src/config.ts",
@@ -3678,6 +4062,7 @@
       ],
       "./src/render.ts": [
         "./node_modules/graphql/index.d.ts",
+        "./node_modules/type-fest/ts41/index.d.ts",
         "./src/config.ts"
       ],
       "./src/types.ts": [
@@ -3940,6 +4325,44 @@
       "./node_modules/pretty-format/build/index.d.ts",
       "./node_modules/pretty-format/build/types.d.ts",
       "./node_modules/tslib/tslib.d.ts",
+      "./node_modules/type-fest/base.d.ts",
+      "./node_modules/type-fest/source/async-return-type.d.ts",
+      "./node_modules/type-fest/source/asyncify.d.ts",
+      "./node_modules/type-fest/source/basic.d.ts",
+      "./node_modules/type-fest/source/conditional-except.d.ts",
+      "./node_modules/type-fest/source/conditional-keys.d.ts",
+      "./node_modules/type-fest/source/conditional-pick.d.ts",
+      "./node_modules/type-fest/source/entries.d.ts",
+      "./node_modules/type-fest/source/entry.d.ts",
+      "./node_modules/type-fest/source/except.d.ts",
+      "./node_modules/type-fest/source/fixed-length-array.d.ts",
+      "./node_modules/type-fest/source/iterable-element.d.ts",
+      "./node_modules/type-fest/source/literal-union.d.ts",
+      "./node_modules/type-fest/source/merge-exclusive.d.ts",
+      "./node_modules/type-fest/source/merge.d.ts",
+      "./node_modules/type-fest/source/mutable.d.ts",
+      "./node_modules/type-fest/source/opaque.d.ts",
+      "./node_modules/type-fest/source/package-json.d.ts",
+      "./node_modules/type-fest/source/partial-deep.d.ts",
+      "./node_modules/type-fest/source/promisable.d.ts",
+      "./node_modules/type-fest/source/promise-value.d.ts",
+      "./node_modules/type-fest/source/readonly-deep.d.ts",
+      "./node_modules/type-fest/source/require-at-least-one.d.ts",
+      "./node_modules/type-fest/source/require-exactly-one.d.ts",
+      "./node_modules/type-fest/source/set-optional.d.ts",
+      "./node_modules/type-fest/source/set-required.d.ts",
+      "./node_modules/type-fest/source/set-return-type.d.ts",
+      "./node_modules/type-fest/source/stringified.d.ts",
+      "./node_modules/type-fest/source/tsconfig-json.d.ts",
+      "./node_modules/type-fest/source/union-to-intersection.d.ts",
+      "./node_modules/type-fest/source/utilities.d.ts",
+      "./node_modules/type-fest/source/value-of.d.ts",
+      "./node_modules/type-fest/ts41/camel-case.d.ts",
+      "./node_modules/type-fest/ts41/delimiter-case.d.ts",
+      "./node_modules/type-fest/ts41/index.d.ts",
+      "./node_modules/type-fest/ts41/kebab-case.d.ts",
+      "./node_modules/type-fest/ts41/pascal-case.d.ts",
+      "./node_modules/type-fest/ts41/snake-case.d.ts",
       "./node_modules/typescript/lib/lib.dom.d.ts",
       "./node_modules/typescript/lib/lib.es2015.collection.d.ts",
       "./node_modules/typescript/lib/lib.es2015.core.d.ts",
