@@ -49,6 +49,11 @@ const schema = buildSchema(/* GraphQL */ `
     stringList: [String]
   }
 
+  input TestInput {
+    stringInput: String
+    booleanInput: Boolean
+  }
+
   type Query {
     testType: TestType!
     testUnion: TestUnion!
@@ -56,7 +61,14 @@ const schema = buildSchema(/* GraphQL */ `
   }
 
   type Mutation {
-    testMutation: TestType
+    testMutation(
+      id: ID
+      string: String
+      Int: Int
+      Float: Float
+      object: TestInput
+      list: [String]
+    ): TestType
   }
 `)
 
@@ -502,6 +514,22 @@ it("handles mutations", async () => {
   const output = await plugin(schema, documents, {})
   expect(output.content.trim()).toEqual(
     "export const testMutationMock = { data: { testMutation: { string: 'Hello World' } } };"
+  )
+})
+
+it("handles render mutations in TypeScript correctly", async () => {
+  const documents = buildDocuments([
+    /* GraphQL */ `
+      mutation test {
+        testMutation {
+          string
+        }
+      }
+    `,
+  ])
+  const output = await plugin(schema, documents, {}, { outputFile: "test.tsx" })
+  expect(output.content.trim()).toEqual(
+    "export const testMutationMock: ExecutionResult<TestMutation> = { data: { testMutation: { string: 'Hello World' } } };"
   )
 })
 

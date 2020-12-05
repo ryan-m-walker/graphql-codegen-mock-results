@@ -1,5 +1,7 @@
+import { JsonValue } from "type-fest"
+
 export type MocksPluginConfig = {
-  customScalarValues?: { [key: string]: any }
+  customScalarValues?: { [key: string]: JsonValue }
   noExport?: boolean
   namePrefix?: string
   nameSuffix?: string
