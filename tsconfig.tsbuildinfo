@@ -217,8 +217,8 @@
         "affectsGlobalScope": true
       },
       "./node_modules/tslib/tslib.d.ts": {
-        "version": "9eb0ae9fa333acfc2dcbe6a7eaa2ab8be46b97ca259982c797c39167823235d5",
-        "signature": "9eb0ae9fa333acfc2dcbe6a7eaa2ab8be46b97ca259982c797c39167823235d5",
+        "version": "4576b4e61049f5ffd7c9e935cf88832e089265bdb15ffc35077310042cbbbeea",
+        "signature": "4576b4e61049f5ffd7c9e935cf88832e089265bdb15ffc35077310042cbbbeea",
         "affectsGlobalScope": false
       },
       "./src/config.ts": {
@@ -721,24 +721,19 @@
         "signature": "5375bb0209e24fa9f1968d78202308dc4d7762bd1a85c50e32caedd83b49c70d",
         "affectsGlobalScope": false
       },
-      "./node_modules/@types/seed-random/index.d.ts": {
-        "version": "54a0760bac71a85349a00f6c4116b108d7c5b81b2d08c95b60abb73ada3fbd8b",
-        "signature": "54a0760bac71a85349a00f6c4116b108d7c5b81b2d08c95b60abb73ada3fbd8b",
-        "affectsGlobalScope": false
-      },
       "./src/random.ts": {
-        "version": "e97d9f137ccd73c69e3a0643a22d2a07fab26b42a4181744a0b1edcbf848ad44",
-        "signature": "041f0604d1d32ac3ca5954a8564dbe399ec1b89efb3641de2bc700b7a029ad5d",
+        "version": "7af2d7ead495b371b739a6e8fc2ccf164191cf8a5a70d831a9d388b6655371c9",
+        "signature": "7e8313097979ca2656fe1d672f0cd456f21eed6017f3df3457877daa145787db",
         "affectsGlobalScope": false
       },
       "./src/types.ts": {
-        "version": "01878840c4a33239374c212ff1c3aa56007ab85d7552ba474d0115a02b5e1c88",
-        "signature": "2e54c065d7a14ce616d24096fa2e0f87d2a319628c0200ee0bea52733affbbc7",
+        "version": "77e1cedb0f05be4ca21481e846640eceb2b63535216954214c52a5ad1e56f958",
+        "signature": "a59cbe97e2e4290a1d37e69f283a38cd92856ae253b199c77a0933c4729a7c84",
         "affectsGlobalScope": false
       },
       "./src/execute.ts": {
-        "version": "4e7a13662b8c92ad45bf8ca91f366cb5f52ea75df0a9c561e04463275d3e9bdd",
-        "signature": "c1f891a44e52dd85cc57764146c7614e4209d8522e2c6609922f363e40c304cc",
+        "version": "0c0d4c4ead1f8c2904b507519ecf6cb540b942b8efb26600ee00318fb917ee03",
+        "signature": "0fa151fc6d674295e9b3f482ef09ba5f65d7a9a8e6a79b95a578b8465aad9a32",
         "affectsGlobalScope": false
       },
       "./node_modules/@graphql-codegen/plugin-helpers/resolve-external-module-and-fn.d.ts": {
@@ -1036,6 +1031,11 @@
         "signature": "04a57a2e40b72b5cfe950f17e8192f716972a9a85303191263d627e4b7e2ba75",
         "affectsGlobalScope": false
       },
+      "./node_modules/@types/seed-random/index.d.ts": {
+        "version": "54a0760bac71a85349a00f6c4116b108d7c5b81b2d08c95b60abb73ada3fbd8b",
+        "signature": "54a0760bac71a85349a00f6c4116b108d7c5b81b2d08c95b60abb73ada3fbd8b",
+        "affectsGlobalScope": false
+      },
       "./node_modules/@graphql-codegen/visitor-plugin-common/utils.d.ts": {
         "version": "f6e588adff8e65130a613f14bd040ddbb16cb407341e82ba77d4ebb96afa7c3b",
         "signature": "f6e588adff8e65130a613f14bd040ddbb16cb407341e82ba77d4ebb96afa7c3b",
@@ -1137,17 +1137,17 @@
         "affectsGlobalScope": false
       },
       "./src/utils.ts": {
-        "version": "3962dc8f5aea17f8c9f09a456e9db5630658d7b4f77750f048b1e2ab76e63649",
+        "version": "b47978c4b6d1e1800584a395cdd0f99632d39696c2d48c75a46779dafac3caf5",
         "signature": "374bc3ddcc499aa1499e777bf94bcef3b821f8b47026816f51811bf5d2f31cee",
         "affectsGlobalScope": false
       },
       "./src/render.ts": {
-        "version": "d9293101ae9e332254e39c0ce0e02f580def2900f997d462aa0740361ae56d5d",
-        "signature": "6438133355aed48281c0c39e05f1de56aae275940d968a7aad418a7089413efd",
+        "version": "d341ee5a36f666bfd728b7f1864c1d7f548468eb0c519a976cff81e25dee0e29",
+        "signature": "36fe11416fc5671432fc201df39727ad72edc0e1958838fbcbf20b5b3fcd9bac",
         "affectsGlobalScope": false
       },
       "./src/index.ts": {
-        "version": "2b85a7af136eed86b0d294670dad45d192ce83bc75a2b71349760568bfc9ef50",
+        "version": "13b59453b2a77818273bf05be09d9e224d4b950467cc5aac8566086d837f39d3",
         "signature": "89cc40960afaf8f23a3ada5bbb6451b06b7b8a868098eeadc2fb2e559909df33",
         "affectsGlobalScope": false
       },
@@ -1476,9 +1476,24 @@
         "signature": "480dcf599750efc664ba6edba1ed91fb5761ef5ae0e45e475b69a994e312db73",
         "affectsGlobalScope": true
       },
+      "./node_modules/@types/json-schema/index.d.ts": {
+        "version": "b2be568d8ce95fcb26eebd04c035d94825655fdf689bf67d799f5ff8cbbb1024",
+        "signature": "b2be568d8ce95fcb26eebd04c035d94825655fdf689bf67d799f5ff8cbbb1024",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/json5/index.d.ts": {
+        "version": "96d14f21b7652903852eef49379d04dbda28c16ed36468f8c9fa08f7c14c9538",
+        "signature": "96d14f21b7652903852eef49379d04dbda28c16ed36468f8c9fa08f7c14c9538",
+        "affectsGlobalScope": false
+      },
       "./node_modules/@types/normalize-package-data/index.d.ts": {
         "version": "c9ad058b2cc9ce6dc2ed92960d6d009e8c04bef46d3f5312283debca6869f613",
         "signature": "c9ad058b2cc9ce6dc2ed92960d6d009e8c04bef46d3f5312283debca6869f613",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/parse-json/index.d.ts": {
+        "version": "2b8264b2fefd7367e0f20e2c04eed5d3038831fe00f5efbc110ff0131aab899b",
+        "signature": "2b8264b2fefd7367e0f20e2c04eed5d3038831fe00f5efbc110ff0131aab899b",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/prettier/index.d.ts": {
@@ -1512,7 +1527,7 @@
       "importHelpers": true,
       "experimentalDecorators": true,
       "module": 1,
-      "target": 1,
+      "target": 5,
       "lib": [
         "lib.es2015.d.ts",
         "lib.esnext.d.ts",
@@ -2576,7 +2591,6 @@
         "./node_modules/tslib/tslib.d.ts"
       ],
       "./src/execute.ts": [
-        "./node_modules/@types/seed-random/index.d.ts",
         "./node_modules/graphql/index.d.ts",
         "./node_modules/tslib/tslib.d.ts",
         "./src/config.ts",
@@ -2594,7 +2608,6 @@
         "./src/utils.ts"
       ],
       "./src/random.ts": [
-        "./node_modules/@types/seed-random/index.d.ts",
         "./node_modules/tslib/tslib.d.ts"
       ],
       "./src/render.ts": [
@@ -3655,16 +3668,13 @@
         "./node_modules/pretty-format/build/types.d.ts"
       ],
       "./src/execute.ts": [
-        "./node_modules/@types/seed-random/index.d.ts",
         "./node_modules/graphql/index.d.ts",
-        "./src/config.ts"
+        "./src/config.ts",
+        "./src/random.ts"
       ],
       "./src/index.ts": [
         "./node_modules/@graphql-codegen/plugin-helpers/index.d.ts",
         "./src/config.ts"
-      ],
-      "./src/random.ts": [
-        "./node_modules/@types/seed-random/index.d.ts"
       ],
       "./src/render.ts": [
         "./node_modules/graphql/index.d.ts",
@@ -3767,6 +3777,8 @@
       "./node_modules/@types/istanbul-lib-report/index.d.ts",
       "./node_modules/@types/istanbul-reports/index.d.ts",
       "./node_modules/@types/jest/index.d.ts",
+      "./node_modules/@types/json-schema/index.d.ts",
+      "./node_modules/@types/json5/index.d.ts",
       "./node_modules/@types/node/assert.d.ts",
       "./node_modules/@types/node/async_hooks.d.ts",
       "./node_modules/@types/node/base.d.ts",
@@ -3815,6 +3827,7 @@
       "./node_modules/@types/node/worker_threads.d.ts",
       "./node_modules/@types/node/zlib.d.ts",
       "./node_modules/@types/normalize-package-data/index.d.ts",
+      "./node_modules/@types/parse-json/index.d.ts",
       "./node_modules/@types/prettier/index.d.ts",
       "./node_modules/@types/seed-random/index.d.ts",
       "./node_modules/@types/stack-utils/index.d.ts",

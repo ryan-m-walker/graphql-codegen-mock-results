@@ -9,7 +9,7 @@
     "importHelpers": true,
     "experimentalDecorators": true,
     "module": "commonjs",
-    "target": "es5",
+    "target": "es2018",
     "lib": ["es6", "esnext", "es2015", "dom"],
     "suppressImplicitAnyIndexErrors": true,
     "moduleResolution": "node",
