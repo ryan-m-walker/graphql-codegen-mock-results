@@ -209,9 +209,9 @@ it("allows a custom name suffix if one is passed in config", async () => {
       }
     }
   `
-  const output = await executePlugin(document, { mockSuffix: "" })
+  const output = await executePlugin(document, { mockSuffix: "$$" })
   expect(output.content.trim()).toEqual(
-    "export const test = { data: { testType: { string: 'Hello World' } } };"
+    "export const testQueryMock$$ = { data: { testType: { string: 'Hello World' } } };"
   )
 })
 

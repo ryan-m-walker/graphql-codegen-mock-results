@@ -69,13 +69,12 @@ export function nameBuilderFactory(
     const formatter = config.mockPrefix ? capitalize : toPascalCase
     const baseName =
       operation.name?.value ?? `Unnamed_${++unnamedOperationCount}_`
+
     name += formatter(baseName)
+    name += getOperationRootType(schema, operation).name + "Mock"
 
     if (config.mockSuffix != null) {
       name += config.mockSuffix
-    } else {
-      const operationTypeName = getOperationRootType(schema, operation).name
-      name += operationTypeName + "Mock"
     }
 
     return name
