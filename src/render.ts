@@ -8,7 +8,6 @@ import type { JsonValue } from "type-fest"
 
 import { MocksPluginConfig } from "./config"
 import { PluginInfo } from "./types"
-import { capitalize, toPascalCase } from "./utils"
 
 export function renderResult(
   operation: OperationDefinitionNode,
@@ -39,9 +38,9 @@ export function buildType(
   const namingConvention =
     typeScriptOperationsPlugin?.namingConvention ?? config.namingConvention
   const typesPrefix =
-    typeScriptOperationsPlugin?.typesPrefix ?? config.typesPrefix ?? ""
+    typeScriptOperationsPlugin?.typesPrefix ?? config.typesPrefix
   const typesSuffix =
-    typeScriptOperationsPlugin?.typesSuffix ?? config.typesSuffix ?? ""
+    typeScriptOperationsPlugin?.typesSuffix ?? config.typesSuffix
 
   const root = getOperationRootType(schema, operation)
   const convert = convertFactory({ namingConvention })
@@ -60,22 +59,21 @@ export function nameBuilderFactory(
   let unnamedOperationCount = 0
 
   return function buildName(operation: OperationDefinitionNode) {
+    const convert = convertFactory({
+      namingConvention: config.mockNamingConvention,
+    })
     let name = ""
 
-    if (config.mockPrefix != null) {
-      name += config.mockPrefix
-    }
+    name += config.mockPrefix
 
-    const formatter = config.mockPrefix ? capitalize : toPascalCase
     const baseName =
       operation.name?.value ?? `Unnamed_${++unnamedOperationCount}_`
 
-    name += formatter(baseName)
-    name += getOperationRootType(schema, operation).name + "Mock"
+    name += convert(
+      baseName + getOperationRootType(schema, operation).name + "Mock"
+    )
 
-    if (config.mockSuffix != null) {
-      name += config.mockSuffix
-    }
+    name += config.mockSuffix
 
     return name
   }

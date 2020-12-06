@@ -197,7 +197,7 @@ it("adds name prefix if one is passed in config", async () => {
   `
   const output = await executePlugin(documents, { mockPrefix: "my" })
   expect(output.content.trim()).toEqual(
-    "export const myTestQueryMock = { data: { testType: { string: 'Hello World' } } };"
+    "export const mytestQueryMock = { data: { testType: { string: 'Hello World' } } };"
   )
 })
 
@@ -249,8 +249,8 @@ it("gives a place holder name for unnamed operations", async () => {
   const output = await executePlugin(documents, {})
   expect(output.content.trim()).toEqual(
     [
-      "export const unnamed_1_QueryMock = { data: { testType: { id: 'e509e6ea-9fee-442a-9962-587ce7190430' } } };",
-      "export const unnamed_2_QueryMock = { data: { testType: { string: 'Hello World' } } };",
+      "export const unnamed_1_queryMock = { data: { testType: { id: 'e509e6ea-9fee-442a-9962-587ce7190430' } } };",
+      "export const unnamed_2_queryMock = { data: { testType: { string: 'Hello World' } } };",
     ].join("\n\n")
   )
 })
@@ -739,5 +739,21 @@ it("will choose `typescript-operations` prefix and suffix over main config", asy
   )
   expect(output.content.trim()).toEqual(
     "export const testQueryMock: ExecutionResult<$TestQueryMock> = { data: { testType: { string: 'Hello World' } } };"
+  )
+})
+
+it("allows setting naming convention for mocks", async () => {
+  const document = /* GraphQL */ `
+    query test {
+      testType {
+        string
+      }
+    }
+  `
+  const output = await executePlugin(document, {
+    mockNamingConvention: "constant-case#constantCase",
+  })
+  expect(output.content.trim()).toEqual(
+    "export const TEST_QUERY_MOCK = { data: { testType: { string: 'Hello World' } } };"
   )
 })

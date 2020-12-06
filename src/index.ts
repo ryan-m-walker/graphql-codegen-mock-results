@@ -2,18 +2,13 @@ import { PluginFunction, Types } from "@graphql-codegen/plugin-helpers"
 import { Kind } from "graphql"
 import seed from "seed-random"
 
-import { MocksPluginConfig } from "./config"
+import { defaultConfig, MocksPluginConfig } from "./config"
 import { execute } from "./execute"
 import { nameBuilderFactory, renderResult } from "./render"
 import { isTypeScript } from "./utils"
 
 // Use a constant seed so that all random results are consistent
 const SEED = "123"
-
-const defaultConfig: MocksPluginConfig = {
-  addTypename: false,
-  namingConvention: "pascal-case#pascalCase",
-}
 
 export const plugin: PluginFunction<
   MocksPluginConfig,
@@ -26,7 +21,7 @@ export const plugin: PluginFunction<
 
   const isTS = isTypeScript(info?.outputFile)
   const results = []
-  const buildName = nameBuilderFactory(schema, config)
+  const buildName = nameBuilderFactory(schema, mergedConfig)
 
   const random = seed(SEED)
 

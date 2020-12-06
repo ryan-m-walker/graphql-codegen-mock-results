@@ -154,6 +154,12 @@ generates:
             HTML: <p>Hello World</p>
 ```
 
+#### `mockNamingConvention`
+
+type: `NamingConvention` default: `camel-case#camelCase`
+
+Allows you to override the naming convention for the output mocks. The format of the converter must be a valid `module#method`. You can also use "keep" to keep all GraphQL names as-is.
+
 #### `mockPrefix`
 
 type: `string`, default `''`
@@ -162,6 +168,6 @@ Changes the mocks variable name prefix.
 
 #### `mockSuffix`
 
-type: `string`, default `'<operation-type>Mock'`
+type: `string`, default `''`
 
 Changes the mocks variable suffix.
