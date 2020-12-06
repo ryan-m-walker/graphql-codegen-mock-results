@@ -1,4 +1,4 @@
-# GraphQL Codegen Mocks
+# graphql-codegen-mock-results
 
 ## A Graphql Codegen plugin for mocking operation results
 
