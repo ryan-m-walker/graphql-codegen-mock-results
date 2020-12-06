@@ -17,23 +17,9 @@ export function renderResult(
   isTypeScript: boolean,
   nameBuilder: ReturnType<typeof nameBuilderFactory>
 ): string {
-  let result = ""
-
   const operationName = nameBuilder(operation)
   const operationType = isTypeScript ? buildType(operation, schema, config) : ""
-
-  if (!config.noExport) {
-    result += "export "
-  }
-
-  result += `const ${operationName}${operationType} = { data: ${data} }`
-
-  if (config.immutableResults && isTypeScript) {
-    result += " as const"
-  }
-
-  result += ";"
-  return result
+  return `export const ${operationName}${operationType} = { data: ${data} };`
 }
 
 export function buildType(
@@ -42,12 +28,9 @@ export function buildType(
   config: MocksPluginConfig
 ): string {
   const root = getOperationRootType(schema, operation)
-  const convert = convertFactory({ namingConvention: config.namePrefix })
+  const convert = convertFactory({ namingConvention: config.namingConvention })
   const name = convert(operation)
-  return `: ExecutionResult<${renderReadOnly(
-    name + root.name,
-    config?.immutableResults
-  )}>`
+  return `: ExecutionResult<${name + root.name}>`
 }
 
 export type NameBuilderFn = (operation: OperationDefinitionNode) => string
@@ -62,17 +45,17 @@ export function nameBuilderFactory(
   return function buildName(operation: OperationDefinitionNode) {
     let name = ""
 
-    if (config.namePrefix != null) {
-      name += config.namePrefix
+    if (config.mockPrefix != null) {
+      name += config.mockPrefix
     }
 
-    const formatter = config.namePrefix ? capitalize : toPascalCase
+    const formatter = config.mockPrefix ? capitalize : toPascalCase
     const baseName =
       operation.name?.value ?? `Unnamed_${++unnamedOperationCount}_`
     name += formatter(baseName)
 
-    if (config.nameSuffix != null) {
-      name += config.nameSuffix
+    if (config.mockSuffix != null) {
+      name += config.mockSuffix
     } else {
       const operationTypeName = getOperationRootType(schema, operation).name
       name += operationTypeName + "Mock"
@@ -80,14 +63,6 @@ export function nameBuilderFactory(
 
     return name
   }
-}
-
-function renderReadOnly(value: string, shouldRender: boolean) {
-  if (!shouldRender) {
-    return value
-  }
-
-  return `ReadOnly<${value}>`
 }
 
 export function renderCustomScalarValue(input: JsonValue): string {

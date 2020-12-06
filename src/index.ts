@@ -51,7 +51,7 @@ export const plugin: PluginFunction<
 
   const imports = []
   if (isTS) {
-    imports.push("import { ExecutionResult } from 'graphql'")
+    imports.push("import { ExecutionResult } from 'graphql';")
   }
 
   return {

@@ -104,6 +104,38 @@ it("handles list types", async () => {
   )
 })
 
+it("handles multiple operations in one document", async () => {
+  const documents = buildDocuments([
+    /* GraphQL */ `
+      query test {
+        testType {
+          boolean
+        }
+      }
+
+      query test2 {
+        testType {
+          string
+        }
+      }
+
+      mutation test3 {
+        testMutation {
+          int
+        }
+      }
+    `,
+  ])
+  const output = await plugin(schema, documents, {})
+  expect(output.content.trim()).toEqual(
+    [
+      "export const testQueryMock = { data: { testType: { boolean: true } } };",
+      "export const test2QueryMock = { data: { testType: { string: 'Hello World' } } };",
+      "export const test3MutationMock = { data: { testMutation: { int: -28 } } };",
+    ].join("\n\n")
+  )
+})
+
 it("mocks built in scalar values", async () => {
   const documents = buildDocuments([
     /* GraphQL */ `
@@ -146,22 +178,6 @@ it("handles __typename", async () => {
   )
 })
 
-it("does not render exports if noExport is true", async () => {
-  const documents = buildDocuments([
-    /* GraphQL */ `
-      query test {
-        testType {
-          string
-        }
-      }
-    `,
-  ])
-  const output = await plugin(schema, documents, { noExport: true })
-  expect(output.content.trim()).toEqual(
-    "const testQueryMock = { data: { testType: { string: 'Hello World' } } };"
-  )
-})
-
 it("adds name prefix if one is passed in config", async () => {
   const documents = buildDocuments([
     /* GraphQL */ `
@@ -172,7 +188,7 @@ it("adds name prefix if one is passed in config", async () => {
       }
     `,
   ])
-  const output = await plugin(schema, documents, { namePrefix: "my" })
+  const output = await plugin(schema, documents, { mockPrefix: "my" })
   expect(output.content.trim()).toEqual(
     "export const myTestQueryMock = { data: { testType: { string: 'Hello World' } } };"
   )
@@ -188,7 +204,7 @@ it("allows a custom name suffix if one is passed in config", async () => {
       }
     `,
   ])
-  const output = await plugin(schema, documents, { nameSuffix: "" })
+  const output = await plugin(schema, documents, { mockSuffix: "" })
   expect(output.content.trim()).toEqual(
     "export const test = { data: { testType: { string: 'Hello World' } } };"
   )
@@ -424,6 +440,36 @@ it("handles fragments", async () => {
   )
 })
 
+it("handles multiple fragments", async () => {
+  const documents = buildDocuments([
+    /* GraphQL */ `
+      query test {
+        testType {
+          string
+          ...testFragment1
+          ...testFragment2
+        }
+      }
+
+      fragment testFragment1 on TestType {
+        string
+        int
+        boolean
+      }
+
+      fragment testFragment2 on TestType {
+        int
+        boolean
+        float
+      }
+    `,
+  ])
+  const output = await plugin(schema, documents, {})
+  expect(output.content.trim()).toEqual(
+    "export const testQueryMock = { data: { testType: { string: 'Hello World', int: 84, boolean: false, float: -95.27 } } };"
+  )
+})
+
 it("handles nested fragments", async () => {
   const documents = buildDocuments([
     /* GraphQL */ `
@@ -481,7 +527,9 @@ it("adds TypeScript specific code if output file is a .ts file", async () => {
   expect(output.content.trim()).toEqual(
     "export const testQueryMock: ExecutionResult<TestQuery> = { data: { testType: { string: 'Hello World' } } };"
   )
-  expect(output.prepend[0]).toEqual("import { ExecutionResult } from 'graphql'")
+  expect(output.prepend[0]).toEqual(
+    "import { ExecutionResult } from 'graphql';"
+  )
 })
 
 it("adds TypeScript specific code if output file is a .tsx file", async () => {
@@ -498,7 +546,9 @@ it("adds TypeScript specific code if output file is a .tsx file", async () => {
   expect(output.content.trim()).toEqual(
     "export const testQueryMock: ExecutionResult<TestQuery> = { data: { testType: { string: 'Hello World' } } };"
   )
-  expect(output.prepend[0]).toEqual("import { ExecutionResult } from 'graphql'")
+  expect(output.prepend[0]).toEqual(
+    "import { ExecutionResult } from 'graphql';"
+  )
 })
 
 it("handles mutations", async () => {
@@ -563,43 +613,6 @@ it("does not add extra __typename to object that is already querying for it", as
   const output = await plugin(schema, documents, { addTypename: true })
   expect(output.content.trim()).toEqual(
     "export const testQueryMock = { data: { __typename: 'Query', testType: { string: 'Hello World', __typename: 'TestType' } } };"
-  )
-})
-
-it("renders immutable result if the config option is set", async () => {
-  const documents = buildDocuments([
-    /* GraphQL */ `
-      query test {
-        testType {
-          string
-        }
-      }
-    `,
-  ])
-  const output = await plugin(
-    schema,
-    documents,
-    { immutableResults: true },
-    { outputFile: "output.ts" }
-  )
-  expect(output.content.trim()).toEqual(
-    "export const testQueryMock: ExecutionResult<ReadOnly<TestQuery>> = { data: { testType: { string: 'Hello World' } } } as const;"
-  )
-})
-
-it("does not render immutable result if the config option is set but file is not TypeScript", async () => {
-  const documents = buildDocuments([
-    /* GraphQL */ `
-      query test {
-        testType {
-          string
-        }
-      }
-    `,
-  ])
-  const output = await plugin(schema, documents, { immutableResults: true })
-  expect(output.content.trim()).toEqual(
-    "export const testQueryMock = { data: { testType: { string: 'Hello World' } } };"
   )
 })
 
