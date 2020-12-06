@@ -7,6 +7,7 @@ import {
 import type { JsonValue } from "type-fest"
 
 import { MocksPluginConfig } from "./config"
+import { PluginInfo } from "./types"
 import { capitalize, toPascalCase } from "./utils"
 
 export function renderResult(
@@ -15,22 +16,38 @@ export function renderResult(
   data: string,
   config: MocksPluginConfig,
   isTypeScript: boolean,
-  nameBuilder: ReturnType<typeof nameBuilderFactory>
+  nameBuilder: ReturnType<typeof nameBuilderFactory>,
+  info: PluginInfo
 ): string {
   const operationName = nameBuilder(operation)
-  const operationType = isTypeScript ? buildType(operation, schema, config) : ""
+  const operationType = isTypeScript
+    ? buildType(operation, schema, config, info)
+    : ""
   return `export const ${operationName}${operationType} = { data: ${data} };`
 }
 
 export function buildType(
   operation: OperationDefinitionNode,
   schema: GraphQLSchema,
-  config: MocksPluginConfig
+  config: MocksPluginConfig,
+  info: PluginInfo
 ): string {
+  const typeScriptOperationsPlugin = info?.allPlugins?.find(
+    (plugin) => "typescript-operations" in plugin
+  )?.["typescript-operations"]
+
+  const namingConvention =
+    typeScriptOperationsPlugin?.namingConvention ?? config.namingConvention
+  const typesPrefix =
+    typeScriptOperationsPlugin?.typesPrefix ?? config.typesPrefix ?? ""
+  const typesSuffix =
+    typeScriptOperationsPlugin?.typesSuffix ?? config.typesSuffix ?? ""
+
   const root = getOperationRootType(schema, operation)
-  const convert = convertFactory({ namingConvention: config.namingConvention })
+  const convert = convertFactory({ namingConvention })
   const name = convert(operation)
-  return `: ExecutionResult<${name + root.name}>`
+  const nameWithOperation = convert(name + root)
+  return `: ExecutionResult<${typesPrefix + nameWithOperation + typesSuffix}>`
 }
 
 export type NameBuilderFn = (operation: OperationDefinitionNode) => string

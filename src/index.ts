@@ -42,7 +42,15 @@ export const plugin: PluginFunction<
         )
 
         results.push(
-          renderResult(definition, schema, data, mergedConfig, isTS, buildName)
+          renderResult(
+            definition,
+            schema,
+            data,
+            mergedConfig,
+            isTS,
+            buildName,
+            info
+          )
         )
       }
     }

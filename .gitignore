@@ -4,3 +4,4 @@ coverage
 dist
 temp
 tsconfig.tsbuildinfo
+yarn-error.log

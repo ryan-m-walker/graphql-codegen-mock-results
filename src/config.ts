@@ -6,4 +6,6 @@ export type MocksPluginConfig = {
   mockPrefix?: string
   mockSuffix?: string
   namingConvention?: string
+  typesPrefix?: string
+  typesSuffix?: string
 }

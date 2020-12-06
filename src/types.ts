@@ -1,3 +1,4 @@
+import { Types } from "@graphql-codegen/plugin-helpers"
 import {
   FieldNode,
   FragmentDefinitionNode,
@@ -20,4 +21,13 @@ export type ExecutionContext = {
   operation: OperationDefinitionNode
   config: MocksPluginConfig
   random: Random
+}
+
+export type PluginInfo = {
+  outputFile?: string
+  allPlugins?: Types.ConfiguredPlugin[]
+  pluginContext?: {
+    [key: string]: any
+  }
+  [key: string]: any
 }
