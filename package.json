@@ -1,6 +1,6 @@
 {
   "name": "graphql-codegen-mock-results",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "main": "dist/index.js",
   "license": "MIT",
   "author": "Ryan Walker <ryan.matthew.walker@gmail.com>",
