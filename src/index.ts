@@ -11,9 +11,8 @@ import { isTypeScript } from "./utils"
 const SEED = "123"
 
 const defaultConfig: MocksPluginConfig = {
-  noExport: false,
   addTypename: false,
-  immutableResults: false,
+  namingConvention: "pascal-case#pascalCase",
 }
 
 export const plugin: PluginFunction<
