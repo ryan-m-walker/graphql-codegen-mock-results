@@ -1,3 +1,4 @@
+import { convertFactory } from "@graphql-codegen/visitor-plugin-common"
 import {
   DocumentNode,
   FieldNode,
@@ -42,7 +43,7 @@ export function execute(
     config,
     random
   )
-  const result = executeOperation(context, context.operation)
+  const result = executeOperation(context, context.operation, config)
   return result
 }
 
@@ -82,17 +83,19 @@ function buildExecutionContext(
 
 function executeOperation(
   context: ExecutionContext,
-  operation: OperationDefinitionNode
+  operation: OperationDefinitionNode,
+  config: MocksPluginConfig
 ) {
   const type = getOperationRootType(context.schema, context.operation)
-  const res = executeSelectionSet(context, type, operation.selectionSet)
+  const res = executeSelectionSet(context, type, operation.selectionSet, config)
   return res
 }
 
 function executeSelectionSet(
   context: ExecutionContext,
   parentType: GraphQLObjectType,
-  selectionSet: SelectionSetNode
+  selectionSet: SelectionSetNode,
+  config: MocksPluginConfig
 ) {
   const fields = collectFields(
     context,
@@ -109,7 +112,7 @@ function executeSelectionSet(
   }
 
   for (const fieldName of Object.keys(fields)) {
-    const field = resolveField(context, parentType, fields[fieldName])
+    const field = resolveField(context, parentType, fields[fieldName], config)
     // Filter unresolved fields (like on union selection set)
     if (field) {
       result.push(field)
@@ -122,7 +125,8 @@ function executeSelectionSet(
 function resolveField(
   context: ExecutionContext,
   parentType: GraphQLObjectType,
-  fieldNodes: FieldNode[]
+  fieldNodes: FieldNode[],
+  config: MocksPluginConfig
 ) {
   const fieldNode = fieldNodes[0]
   const fieldName = fieldNode.name.value
@@ -145,17 +149,23 @@ function resolveField(
   if (isListType(unwrapped)) {
     const values: string[] = new Array(Math.floor(context.random() * 3) + 1)
       .fill(0)
-      .map(() => handleNamedType(context, type, fieldNode))
+      .map(() => handleNamedType(context, type, fieldNode, config))
     return `${fieldReturnName}: [${values.join(", ")}]`
   }
 
-  return `${fieldReturnName}: ${handleNamedType(context, type, fieldNode)}`
+  return `${fieldReturnName}: ${handleNamedType(
+    context,
+    type,
+    fieldNode,
+    config
+  )}`
 }
 
 function handleNamedType(
   context: ExecutionContext,
   type: GraphQLNamedType,
-  fieldNode: FieldNode
+  fieldNode: FieldNode,
+  config: MocksPluginConfig
 ) {
   // taken from https://github.com/ardatan/graphql-tools/blob/master/packages/mock/src/mocking.ts#L57-L64
   function uuidv4() {
@@ -185,12 +195,17 @@ function handleNamedType(
   }
 
   if (isObjectType(type)) {
-    return executeSelectionSet(context, type, fieldNode.selectionSet)
+    return executeSelectionSet(context, type, fieldNode.selectionSet, config)
   }
 
   if (isInterfaceType(type)) {
     const types = context.schema.getImplementations(type).objects
-    return `${executeSelectionSet(context, types[0], fieldNode.selectionSet)}`
+    return `${executeSelectionSet(
+      context,
+      types[0],
+      fieldNode.selectionSet,
+      config
+    )}`
   }
 
   if (isUnionType(type)) {
@@ -198,19 +213,28 @@ function handleNamedType(
     return `${executeSelectionSet(
       context,
       selectedType,
-      fieldNode.selectionSet
+      fieldNode.selectionSet,
+      config
     )}`
   }
 
   if (isEnumType(type)) {
     const value = type.getValues()[0]?.name
+
+    if (config.enumValues === "type-value") {
+      const convertEnum = convertFactory({
+        namingConvention: config.enumValuesConvention,
+      })
+
+      const convertType = convertFactory({
+        namingConvention: config.typenamesConvention,
+      })
+
+      return `${convertType(type.name)}.${convertEnum(value)}`
+    }
+
     return `'${value}'`
   }
-
-  // if (type instanceof GraphQLInputObjectType) {
-  //   console.log("HERE")
-  //   return ""
-  // }
 
   return ""
 }

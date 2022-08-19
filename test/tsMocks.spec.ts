@@ -349,7 +349,21 @@ it("allows built in scalar values to be overwritten with scalarValues config", a
   )
 })
 
-it("handles enum types", async () => {
+it("handles enum types as type-value", async () => {
+  const document = /* GraphQL */ `
+    query test {
+      testType {
+        enum
+      }
+    }
+  `
+  const output = await executePlugin(document, { enumValues: "type-value" })
+  expect(output.content.trim()).toEqual(
+    "export const testQueryMock = { data: { testType: { enum: TestEnum.Option1 } } };"
+  )
+})
+
+it("handles enum types as value", async () => {
   const document = /* GraphQL */ `
     query test {
       testType {
