@@ -5,6 +5,9 @@ export type MocksPluginConfig = {
   addTypename?: boolean
   customScalarValues?: { [key: string]: JsonValue }
   mockNamingConvention?: NamingConvention
+  enumValuesConvention?: NamingConvention
+  typenamesConvention?: NamingConvention
+  enumValues?: string
   mockPrefix?: string
   mockSuffix?: string
   namingConvention?: NamingConvention
@@ -15,6 +18,8 @@ export type MocksPluginConfig = {
 export const defaultConfig: MocksPluginConfig = {
   addTypename: false,
   mockNamingConvention: "camel-case#camelCase",
+  enumValuesConvention: "pascal-case#pascalCase",
+  typenamesConvention: "pascal-case#pascalCase",
   mockPrefix: "",
   mockSuffix: "",
   typesPrefix: "",
